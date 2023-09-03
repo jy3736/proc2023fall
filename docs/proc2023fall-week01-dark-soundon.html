@@ -1,0 +1,692 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Course Overview</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="53ac86a6-1b3b-4516-9643-88171a1a7c67" class="page sans"><header><img class="page-cover-image" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/microprocessor.png" style="object-position:center 68.24%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/yang-g-tr.png"/></div><h1 class="page-title">Course Overview</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="678ac10b-2fbe-4d56-8ee6-578c6f6016bc" class="block-color-teal_background">Weekly Session Agenda and Content</h2><ul id="1847c2ce-8d04-430c-888d-91e2d95723c2" class="bulleted-list"><li style="list-style-type:disc">Course introduction and explanation of class regulations.</li></ul><ul id="cd42a7db-0908-4104-8d17-79a44a1c7b9e" class="bulleted-list"><li style="list-style-type:disc">Development trends of microcontrollers, microprocessors, and modern programming languages.</li></ul><ul id="115ce98e-178a-4e13-b6fb-151f692d41ef" class="bulleted-list"><li style="list-style-type:disc">Register for a Snakify account and learn how to use the learning resources on the website.</li></ul><h2 id="ea6b1cd8-49b8-4263-9efe-ff5ea4b6c74d" class="block-color-teal_background">References</h2><figure id="574b15bf-d32b-4c5a-8fde-a263c833725b"><a  target="_blank" href="https://www.raspberrypi.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Raspberry Pi</div><div class="bookmark-description">From industries large and small, to the kitchen table tinkerer, to the classroom coder, we make computing accessible and affordable for everybody.</div></div><div class="bookmark-href"><img src="https://assets.raspberrypi.com/favicon.png" class="icon bookmark-icon"/>https://www.raspberrypi.com/</div></div><img src="https://assets.raspberrypi.com/static/default-opengraph-f1d3121abeef861889c52dd4a2813df9.png" class="bookmark-image"/></a></figure><figure id="4c14eb8b-cd42-4d77-be47-a26f04852a4f"><a  target="_blank" href="https://www.arduino.cc/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Arduino - Home</div><div class="bookmark-description">Open-source electronic prototyping platform enabling users to create interactive electronic objects.</div></div><div class="bookmark-href"><img src="https://www.arduino.cc/favicon.ico" class="icon bookmark-icon"/>https://www.arduino.cc/</div></div></a></figure><figure id="cd443abf-520a-4e78-b6bb-2efc42929d4a"><a  target="_blank" href="https://www.python.org/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Welcome to Python.org</div><div class="bookmark-description">The official home of the Python Programming Language</div></div><div class="bookmark-href"><img src="https://www.python.org/static/apple-touch-icon-144x144-precomposed.png" class="icon bookmark-icon"/>https://www.python.org/</div></div><img src="https://www.python.org/static/opengraph-icon-200x200.png" class="bookmark-image"/></a></figure><figure id="419ce990-d6d0-47a3-8e31-76e459dea8f2"><a  target="_blank" href="https://snakify.org/en/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Snakify - Python 3 Interactive Course</div><div class="bookmark-description">The online course for beginners with more than 100 problems that turn you into a developer.</div></div><div class="bookmark-href"><img src="https://snakify.org/static/favicon.ico?3c9fe09" class="icon bookmark-icon"/>https://snakify.org/en/</div></div><img src="https://snakify.org/static/images/pony.png" class="bookmark-image"/></a></figure><figure id="f100124c-7642-4569-baff-d351c2589147"><a  target="_blank" href="https://www.tinkercad.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Tinkercad | From mind to design in minutes</div><div class="bookmark-description">Tinkercad is a free, easy-to-use app for 3D design, electronics, and coding.</div></div><div class="bookmark-href"><img src="https://www.tinkercad.com/favicon.ico" class="icon bookmark-icon"/>https://www.tinkercad.com/</div></div><img src="https://www.tinkercad.com/img/tinkercad-logo.png" class="bookmark-image"/></a></figure><h2 id="2e5c15dd-a3e5-4794-909e-de9345662f7f" class="block-color-teal_background">Session Content</h2><table id="4e3e6dea-055d-4e70-8e9f-39578d72da83" class="simple-table"><tbody><tr id="49c31d4e-37f4-41a3-8386-8e3fbcc3627e"><td id="^Dnb" class="block-color-blue_background" style="width:59.00000762939453px">Week</td><td id="vcWL" class="block-color-blue_background" style="width:637.0000305175781px">Subjects</td></tr><tr id="5e1596c7-058b-4dbd-a566-b0cbad987d18"><td id="^Dnb" class="" style="width:59.00000762939453px">1</td><td id="vcWL" class="" style="width:637.0000305175781px">Course Overview
+Formative Assessment (Pre-test)</td></tr><tr id="0cb4abad-b80e-4b73-b083-c30f715c7df3"><td id="^Dnb" class="" style="width:59.00000762939453px">2</td><td id="vcWL" class="" style="width:637.0000305175781px">Introduction to Raspberry Pi and Arudino UNO</td></tr><tr id="01d7d8e4-417b-43a3-86d9-3dd3b51c94e4"><td id="^Dnb" class="" style="width:59.00000762939453px">3</td><td id="vcWL" class="" style="width:637.0000305175781px">Python Fundamentals for Raspberry Workshop
+C/C++ (Arduino IDE) - TinkerCAD Online Simulator</td></tr><tr id="e8e10a07-f61d-49e0-a9c8-12d59fc5077c"><td id="^Dnb" class="" style="width:59.00000762939453px">4</td><td id="vcWL" class="" style="width:637.0000305175781px">Python Fundamentals for Raspberry Pi (Part 1)</td></tr><tr id="4895d380-f7ce-4fa2-8b29-33f94e8a51b9"><td id="^Dnb" class="" style="width:59.00000762939453px">5</td><td id="vcWL" class="" style="width:637.0000305175781px">Python Fundamentals for Raspberry Pi (Part 2)</td></tr><tr id="dad61e7a-00c3-4f47-9a7e-885e5f086977"><td id="^Dnb" class="" style="width:59.00000762939453px">6</td><td id="vcWL" class="" style="width:637.0000305175781px">Python Fundamentals for Raspberry Pi (Part 3)</td></tr><tr id="297b7f9d-6d0a-465d-a2c1-6546f2cb2b0b"><td id="^Dnb" class="" style="width:59.00000762939453px">7</td><td id="vcWL" class="" style="width:637.0000305175781px">Arduino UNO I/O Practice (Part 1) - GPIO</td></tr><tr id="fa4887c5-1361-4371-88f7-5958a56dd01c"><td id="^Dnb" class="" style="width:59.00000762939453px">8</td><td id="vcWL" class="" style="width:637.0000305175781px">Arduino UNO I/O Practice (Part 2) - Serial</td></tr><tr id="37c1a1b6-9769-4864-b07f-ab7f2784c8c8"><td id="^Dnb" class="block-color-gray_background" style="width:59.00000762939453px">9</td><td id="vcWL" class="block-color-gray_background" style="width:637.0000305175781px">Midterm Exam/Project</td></tr><tr id="794f03c7-e5fc-4fbb-bea5-593ac936c89e"><td id="^Dnb" class="" style="width:59.00000762939453px">10</td><td id="vcWL" class="" style="width:637.0000305175781px">Exploring Sustainable Development Goals (SDGs) via Tabletop Gaming
+An Introduction to University Social Responsibility (USR)</td></tr><tr id="2d8c8676-dd8a-44a2-97a6-6b9967d2d35d"><td id="^Dnb" class="" style="width:59.00000762939453px">11</td><td id="vcWL" class="" style="width:637.0000305175781px">Internet of Things (IoT) Final Project 
+Discussing the Project and Crafting the Proposal</td></tr><tr id="6b08886a-53e7-4783-894c-9545584022ae"><td id="^Dnb" class="" style="width:59.00000762939453px">12</td><td id="vcWL" class="" style="width:637.0000305175781px">Arduino UNO I/O Practice (Part 3) - I2C</td></tr><tr id="ad9f6096-bb54-4d87-9207-ee08b18de80d"><td id="^Dnb" class="" style="width:59.00000762939453px">13</td><td id="vcWL" class="" style="width:637.0000305175781px">Raspberry Pi Communication with Arduino UNO via I2C (Part 1)</td></tr><tr id="e7baaac4-ec97-45e7-b2ea-c15089d0bf20"><td id="^Dnb" class="" style="width:59.00000762939453px">14</td><td id="vcWL" class="" style="width:637.0000305175781px">Raspberry Pi Communication with Arduino UNO via I2C (Part 2)</td></tr><tr id="d9655ffc-b273-4202-85ce-a63e11f9279d"><td id="^Dnb" class="" style="width:59.00000762939453px">15</td><td id="vcWL" class="" style="width:637.0000305175781px">Node-Red Basics (Part 1)</td></tr><tr id="78252576-7895-4944-9d22-ba05acfa92b6"><td id="^Dnb" class="" style="width:59.00000762939453px">16</td><td id="vcWL" class="" style="width:637.0000305175781px">Node-Red Basics (Part 2)</td></tr><tr id="58d071d9-1bfd-417d-bfc8-1d9e8117ec05"><td id="^Dnb" class="" style="width:59.00000762939453px">17</td><td id="vcWL" class="" style="width:637.0000305175781px">Confirming the Final Project and Refinement</td></tr><tr id="216f90b1-a057-4191-a705-dd6cbc7d8a27"><td id="^Dnb" class="block-color-gray_background" style="width:59.00000762939453px">18</td><td id="vcWL" class="block-color-gray_background" style="width:637.0000305175781px">Final Project Demonstration and Presentation
+Formative Assessment (Post-test)</td></tr></tbody></table><p id="1251495b-239e-461d-bf00-28d291f2efb8" class="">
+</p><h3 id="9c07b1ef-e22e-4648-bd2a-c95902c8be6f" class="block-color-gray_background">Course Regulations / Grading Rules</h3><h3 id="9360dfcf-df23-4885-b040-0e23762e7c48" class="">上課規範 / 評分規則</h3><ul id="2ddc18f5-c13e-441b-9939-da879bf736c2" class="bulleted-list"><li style="list-style-type:disc">第一堂課鐘響 <strong><mark class="highlight-red">20分鐘後</mark></strong>，不定時使用 Zuvio 線上快速簽到(點名)。<ul id="133681fb-c1cf-479f-a620-6d6960a1d9c4" class="bulleted-list"><li style="list-style-type:circle"><strong>線上簽到率 &gt; 90%</strong>  - <strong>平時成績【總成績】加 5分。</strong></li></ul></li></ul><ul id="f02a8e0f-c21f-47fc-a4dc-15216c5e3b74" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-yellow">上課期間「干擾」0容忍!</mark></strong><ul id="6155412a-6d71-4dda-a6a5-66ddd87085c5" class="bulleted-list"><li style="list-style-type:circle">課堂上嚴禁做其他「與本課程無關」之事務，例如：寫作業、看影片、上網閒逛、...等等。</li></ul><ul id="82b30534-5a03-4201-8df4-4094a0dc7d10" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-red"><strong>罰則：</strong></mark><strong>第一次「口頭警告」，再犯每次『平時成績【總成績】扣 5分』。</strong></li></ul></li></ul><ul id="e32c2dcc-62d6-4453-aea8-362cf5bda0de" class="bulleted-list"><li style="list-style-type:disc">評分規則<ul id="8002ab8c-b14d-4b8c-a1d6-3848d4f48821" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">平時成績 (50%)</mark></strong> - 課堂練習、作業、Zuvio 形成性評量 (填寫狀況)。</li></ul><ul id="db819685-244d-41fa-848b-d13c3cd67b10" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">期中成績 (20%)</mark></strong> - 上機考試/實務專題。</li></ul><ul id="1b27ed7d-8821-4b79-b58c-318fd7b0e9f2" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-red">期末成績 (30%)</mark></strong> - 上機考試/實務專題。</li></ul></li></ul><p id="4df47569-cb38-41d4-ace7-d170d4f04345" class="">
+</p><h3 id="1b517114-540d-47f3-890e-f58fa95bd47d" class="block-color-gray_background">Modern Programming Languages</h3><h3 id="5763e1e7-89fb-422d-91e3-9e5815bcd0fc" class="block-color-yellow"><a  target="_blank" href="https://trends.google.com/trends/explore?date=today%205-y&amp;q=%2Fm%2F05z1_,%2Fm%2F07sbkfb,%2Fm%2F01t6b,%2Fm%2F0jgqg,Javascript">Google Trends</a></h3><figure id="a3fbbd9e-76d6-4a30-b59c-1ea21c479f9c" class="image"><a href="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled.png"><img style="width:1756px" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled.png"/></a></figure><h3 id="fb27dd9f-1b39-473d-b3ae-96a988e5b219" class="block-color-yellow"><a  target="_blank" href="https://www.tiobe.com/tiobe-index/">TIOBE Index </a></h3><figure id="4e2c9fb3-2556-4cb9-859b-0f6c2bc9746a" class="image"><a href="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled%201.png"><img style="width:2075px" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled%201.png"/></a></figure><figure id="5fa11f61-751e-4fd1-8a8c-9cf141cdf1b6" class="image"><a href="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled%202.png"><img style="width:2081px" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled%202.png"/></a></figure><p id="b41676cf-394d-40d0-88bb-a253e72ff37e" class="">
+</p><h3 id="231019a2-9376-4da0-a355-58085fa6676a" class="block-color-gray_background">Microcontrollers and Microprocessors</h3><figure id="936d02a2-1e62-4b2f-86c5-88982ce74d31"><a  target="_blank" href="https://en.wikipedia.org/wiki/Microcontroller" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Microcontroller</div><div class="bookmark-description">A microcontroller is a small computer on a single VLSI integrated circuit (IC) chip. A microcontroller contains one or more CPUs along with memory and programmable input/output peripherals. Program memory in the form of ferroelectric RAM, NOR flash or OTP ROM is also often included on chip, as well as a small amount of RAM. Microcontrollers are designed for embedded applications, in contrast to the microprocessors used in personal computers or other general purpose applications consisting of various discrete chips.</div></div><div class="bookmark-href"><img src="https://en.wikipedia.org/static/apple-touch/wikipedia.png" class="icon bookmark-icon"/>https://en.wikipedia.org/wiki/Microcontroller</div></div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Intel_8742_153056995.jpg/1200px-Intel_8742_153056995.jpg" class="bookmark-image"/></a></figure><figure id="8e0bbbae-fcc4-4fea-9e3e-0836aed89a5d"><a  target="_blank" href="https://en.wikipedia.org/wiki/Microprocessor" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Microprocessor</div><div class="bookmark-description">A microprocessor is a computer processor where the data processing logic and control is included on a single integrated circuit (IC), or a small number of ICs. The microprocessor contains the arithmetic, logic, and control circuitry required to perform the functions of a computer&#x27;s central processing unit (CPU). The IC is capable of interpreting and executing program instructions and performing arithmetic operations. The microprocessor is a multipurpose, clock-driven, register-based, digital integrated circuit that accepts binary data as input, processes it according to instructions stored in its memory, and provides results as output. Microprocessors contain both combinational logic and sequential digital logic, and operate on numbers and symbols represented in the binary number system.</div></div><div class="bookmark-href"><img src="https://en.wikipedia.org/static/apple-touch/wikipedia.png" class="icon bookmark-icon"/>https://en.wikipedia.org/wiki/Microprocessor</div></div><img src="https://upload.wikimedia.org/wikipedia/commons/6/68/TI_TMS1000NLL_1.jpg" class="bookmark-image"/></a></figure><figure id="05db883b-e993-4b10-b7cb-c645ffb122ad"><a  target="_blank" href="https://en.wikipedia.org/wiki/Raspberry_Pi" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Raspberry Pi</div><div class="bookmark-description">Raspberry Pi is a series of small single-board computers (SBCs) developed in the United Kingdom by the Raspberry Pi Foundation in association with Broadcom. The Raspberry Pi project originally leaned toward the promotion of teaching basic computer science in schools. The original model became more popular than anticipated, selling outside its target market for uses such as robotics. It is widely used in many areas, such as for weather monitoring, because of its low cost, modularity, and open design. It is typically used by computer and electronic hobbyists, due to its adoption of the HDMI and USB standards.</div></div><div class="bookmark-href"><img src="https://en.wikipedia.org/static/apple-touch/wikipedia.png" class="icon bookmark-icon"/>https://en.wikipedia.org/wiki/Raspberry_Pi</div></div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Raspberry_Pi_4_Model_B_-_Side.jpg/1200px-Raspberry_Pi_4_Model_B_-_Side.jpg" class="bookmark-image"/></a></figure><figure id="5132b6e5-c89f-4c98-8017-a24b3c3bc5ac"><a  target="_blank" href="https://en.wikipedia.org/wiki/Arduino" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Arduino</div><div class="bookmark-description">Arduino is an open-source hardware and software company, project, and user community that designs and manufactures single-board microcontrollers and microcontroller kits for building digital devices. Its hardware products are licensed under a CC BY-SA license, while the software is licensed under the GNU Lesser General Public License (LGPL) or the GNU General Public License (GPL), permitting the manufacture of Arduino boards and software distribution by anyone. Arduino boards are available commercially from the official website or through authorized distributors.</div></div><div class="bookmark-href"><img src="https://en.wikipedia.org/static/apple-touch/wikipedia.png" class="icon bookmark-icon"/>https://en.wikipedia.org/wiki/Arduino</div></div><img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Arduino_Uno_-_R3.jpg" class="bookmark-image"/></a></figure><h3 id="6e94c640-b5a8-4312-9661-454bb776f0ec" class="block-color-gray_background">Create a Snakify account</h3><hr id="97f34321-6b44-4f11-bf0c-7a4102abc2bf"/><div id="7c68db03-fc07-4655-baaa-0aa659f26cf1" class="column-list"><div id="8cba7a1e-4023-4802-b3a5-f59584f4af85" style="width:50%" class="column"><ul id="df20c97d-04cd-482f-bcab-8a34c8acb611" class="bulleted-list"><li style="list-style-type:disc">Please make use of the provided link to engage in online Python exercises.<ul id="b6bac1e9-ca11-483a-9557-16d92161b5a7" class="bulleted-list"><li style="list-style-type:circle"><a  target="_blank" href="https://snakify.org/join_class/proc2023fall/stust.edu.tw/"><strong>https://snakify.org/join_class/proc2023fall/stust.edu.tw/</strong></a></li></ul><figure class="block-color-orange callout" style="white-space:pre-wrap;display:flex" id="fbf62b76-32b1-43fb-a2a8-0a057082eabe"><div style="font-size:1.5em"><img class="icon" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/yang02.png"/></div><div style="width:100%">Teacher&#x27;s email for Snakify: proc2023fall@stust.edu.tw</div></figure><p id="8dfe20e4-274a-416f-8204-185b8de0360c" class="">
+</p></li></ul></div><div id="add03c99-95f7-4831-8dc0-5b17c6b40bb0" style="width:50%" class="column"><figure id="05245998-00dd-4827-9741-b57524c023ae" class="image"><a href="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled%203.png"><img style="width:1118px" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled%203.png"/></a></figure></div></div><h3 id="9ce4c7ae-2551-40a9-8163-72fe92d290d1" class="block-color-teal_background">Exercises and Assignments</h3><p id="f9816c7e-349b-4d99-bc70-df379553c2fa" class="">
+</p><p id="3ce7c6d7-26d1-4014-9231-5b984e817d3b" class="block-color-gray_background">Assignment 01 - Snakify Python Exercises</p><ul id="560338f9-627b-4764-8f2d-1362c1b5ec40" class="bulleted-list"><li style="list-style-type:disc">Please practice all the problems in <a  target="_blank" href="https://snakify.org/en/lessons/print_input_numbers/problems/">Lesson 1</a>, <a  target="_blank" href="https://snakify.org/en/lessons/integer_float_numbers/problems/">Lesson 2</a>, and <a  target="_blank" href="https://snakify.org/en/lessons/if_then_else_conditions/problems/">Lesson 3</a>.</li></ul><ul id="5b443ed7-bb79-4ca1-9760-841dee2cea6e" class="bulleted-list"><li style="list-style-type:disc">Be sure to register and log in to your Snakify account beforehand.</li></ul><figure id="d03416a4-be5f-4cd6-a2d0-6a6309c6f0aa" class="image"><a href="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled%204.png"><img style="width:576px" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/Untitled%204.png"/></a></figure><p id="305b664b-2a57-497f-9cee-95bf831f3e1e" class="">
+</p><p id="0b80ce73-5f40-444a-a491-309384a27b19" class="block-color-gray_background">Assignment 02 - TinkerCAD - Online Arduino Simulator</p><ol type="1" id="21c55322-a745-4520-9def-c34789a7a27b" class="numbered-list" start="1"><li>Please visit the website <a  target="_blank" href="https://www.tinkercad.com/">https://www.tinkercad.com/</a> and register for an account.</li></ol><ol type="1" id="c245775e-8511-4d13-b729-29e22033af86" class="numbered-list" start="2"><li>This online platform can be used to develop 3D models and Arduino circuits. For this course, we will exclusively utilize the Arduino simulator.</li></ol><ol type="1" id="4b71fa93-a87b-4d02-8d68-78f694ecd8c4" class="numbered-list" start="3"><li>Log in to your account and create a &quot;Circuit&quot; named &quot;w01-lab01.&quot; Then, use the sidebar components to complete the following design.</li></ol><ol type="1" id="99a58056-f380-413d-8a13-0294852a90db" class="numbered-list" start="4"><li>Create two independent Arduino UNO circuits with blinking LED samples, each with a different blinking speed.</li></ol><p id="30c201f2-3fdd-427a-95bb-73bcff102afd" class="">
+</p><figure id="aeff3cf6-c3c3-4f40-9fc8-649a345e78ba" class="image"><a href="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/lab01.gif"><img style="width:480px" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/lab01.gif"/></a></figure><p id="982cccd6-8006-48ee-899a-61389ac7c9f6" class="">
+</p><p id="dd925198-eec0-44e3-b97d-1c528d70ac75" class="">
+</p><figure id="d2557089-ce5f-487a-8bff-47f1e5fa197f" class="image"><a href="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/5.png"><img style="width:1500px" src="Course%20Overview%2053ac86a61b3b4516964388171a1a7c67/5.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
