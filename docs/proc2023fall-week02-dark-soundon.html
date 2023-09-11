@@ -1,0 +1,760 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MCU/MPU Development Platform </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="21d0a714-90f0-4b24-9f1d-b6d451480228" class="page sans"><header><img class="page-cover-image" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/microprocessor.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/yang-g-tr.png"/></div><h1 class="page-title">MCU/MPU Development Platform </h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="da1acd54-95af-435b-9bcf-4f749f0991c5" class="block-color-teal_background">Weekly Session Agenda and Content</h2><ul id="601b0ee4-7c77-445a-8033-89e5f929ec02" class="bulleted-list"><li style="list-style-type:disc">Computer operation principles and basic programming concepts.</li></ul><ul id="3ffa47fb-5900-4273-97dc-e6e1b3114053" class="bulleted-list"><li style="list-style-type:disc">MCU vs. MPU - Arduino vs. Raspberry Pi.</li></ul><ul id="5665f263-3789-43f9-ac65-b0d2726334e4" class="bulleted-list"><li style="list-style-type:disc">Self-learning Python using the online tool Snakify.</li></ul><ul id="1653498e-aebf-40b9-8872-4b2b35de2323" class="bulleted-list"><li style="list-style-type:disc">Self-learning Arduino Programming using the online tool TinkerCAD.</li></ul><h2 id="e9df5121-364f-4f86-a31e-92787a18db7f" class="block-color-teal_background">References</h2><ul id="dd04d7e8-0cfc-44a1-b753-e31554882699" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://www.python.org/">Python 官方網站 (https://www.python.org/)</a></li></ul><ul id="a0a44745-b670-49bd-93d7-cff4f21bc9d5" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://snakify.org/en/">Snakify - 線上學習網</a></li></ul><ul id="d724a6ca-2b1a-44b2-8941-d328fa95b6ac" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://thonny.org/">Thonny - Python IDE for beginners</a></li></ul><ul id="c87b5f6d-daf9-4a15-8022-c65c9128aefc" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://www.tinkercad.com/">TinkerCAD - Online Arduino Emulator (Blockly and C/C++)</a></li></ul><ul id="a12746e7-8922-48fa-a2de-c96652d500ca" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://www.tutorialspoint.com/python3/index.htm">tutorialspoint - Python 3 Tutorial</a></li></ul><ul id="0cddee5a-fc5f-4462-bcbe-45bd2a652b8a" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://www.arduino.cc/reference/en/">Arduino Programing Reference</a></li></ul><ul id="55b1c0e8-2a3f-464d-b404-2f31af836f99" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://www.zuvio.com.tw/">Zuvio - 大學師生互動平台</a></li></ul><h2 id="b48a861e-b327-4d03-a158-97fc155bbf28" class="block-color-teal_background">Session Content</h2><h3 id="5816a202-5a48-4187-8915-a57bd0e1cbd4" class="block-color-gray_background">How Computer Work</h3><div id="ea0f44cc-adb8-4ff0-bbdb-163d69a41200" class="column-list"><div id="2b01c5d4-1772-47dc-906b-444389f7dfb8" style="width:50%" class="column"><figure id="7e78f93e-d159-4213-80ad-bf46860961db"><div class="source"><a  target="_blank" href="https://www.youtube.com/watch?v=xnyFYiK2rSY">https://www.youtube.com/watch?v=xnyFYiK2rSY</a></div></figure><figure id="3667bb14-e61f-4e6d-882e-9b0594082c67"><div class="source"><a  target="_blank" href="https://www.youtube.com/watch?v=ZoqMiFKspAA&amp;t=7s">https://www.youtube.com/watch?v=ZoqMiFKspAA&amp;t=7s</a></div></figure></div><div id="c35e419a-300b-474e-90bc-c1c2f348e7cf" style="width:50%" class="column"><figure id="7176aeaf-0fb0-436e-945c-201b419b4bf7"><div class="source"><a  target="_blank" href="https://www.youtube.com/watch?v=DKGZlaPlVLY&amp;t=5s">https://www.youtube.com/watch?v=DKGZlaPlVLY&amp;t=5s</a></div></figure><p id="25c00531-30dd-4b49-83c1-3f7811cffadf" class="">
+</p></div></div><h3 id="4c72d677-3a1c-4f1a-b052-18449198d190" class="block-color-gray_background">Raspberry Pi vs. Arduino</h3><div id="3e7307c0-7133-4905-85cd-c09370ecbf79" class="column-list"><div id="2684dafd-999c-4048-a202-8bc2303b934a" style="width:50%" class="column"><figure id="c475cf91-5ebf-4471-b97b-08fab6957138"><div class="source"><a  target="_blank" href="https://www.youtube.com/watch?v=7vhvnaWUZjE">https://www.youtube.com/watch?v=7vhvnaWUZjE</a></div></figure></div><div id="083b736d-6be1-4ec0-9f52-2ebc623b484c" style="width:50%" class="column"><figure id="3d8aa9a9-285d-4fb6-9b72-73f3a72f6fd4"><div class="source"><a  target="_blank" href="https://www.youtube.com/watch?v=p40OetppIDg&amp;t=5s">https://www.youtube.com/watch?v=p40OetppIDg&amp;t=5s</a></div></figure></div></div><p id="5a9f890f-d60b-41fa-a0ef-4868b2386ec9" class="">
+</p><h3 id="d83ec683-5758-47b7-9526-4bbcdedbbd19" class="block-color-gray_background">Raspberry Pi - Python Programming</h3><ul id="fe19a0e0-f985-43fe-93ca-f21a618add85" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://snakify.org/en/">Snakify - Learn Python 3 Online</a></li></ul><ul id="83f05ecf-feba-4a39-8f39-7ffaa60148d9" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://www.tutorialspoint.com/python3/index.htm">tutorialspoint - Python 3 Tutorial</a></li></ul><h3 id="81917d9e-dc5a-48b8-9d31-9ba34af4a0d9" class="block-color-gray_background">Arduino - C/C++ Programming</h3><ul id="edf2ae12-8d47-4925-92d2-844cc1ba4875" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://www.tinkercad.com/">TinkerCAD - Online Arduino Emulator (Blockly and C/C++)</a></li></ul><ul id="efdc761a-31fe-43f8-9f87-108252c4b37d" class="bulleted-list"><li style="list-style-type:disc"><a  target="_blank" href="https://www.arduino.cc/reference/en/">Arduino Programing Reference</a></li></ul><p id="d7aceb80-2c01-4827-9d83-6672be8ae6ec" class="">
+</p><h3 id="fbed6f7b-74c4-4fed-a1bb-2da02f59ef8c" class="block-color-gray_background">Assignment Template</h3><p id="ba7d35c9-8660-4be5-a173-29a758ad4524" class="block-color-pink"><strong>Template 1: No need to input data; the result is generated directly after processing.</strong></p><div id="b172d0aa-d17f-44e5-a804-a84ec5dc3b22" class="column-list"><div id="dcb1375d-24bc-4321-94d7-668351a84249" style="width:62.5%" class="column"><pre id="a1912c08-e7fd-4320-b36e-4a31f07dcb50" class="code"><code>#! /bin/python3
+
+def main():
+	print(&quot;Hello, Python world!&quot;)
+
+if __name__==&quot;__main__&quot;:
+    main()
+    exit(0)</code></pre></div><div id="52f6fa2c-d411-40cc-90e5-ed86120a9b26" style="width:37.5%" class="column"><figure id="882e23cb-85aa-4891-a93b-68fa44a9c6cc" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled.png"><img style="width:192px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled.png"/></a></figure><p id="325c2d75-5e99-4774-857b-072130179eae" class="">
+</p></div></div><div id="dcb46e90-18e9-4181-99f3-7ee350c107dc" class="column-list"><div id="20d28c72-3873-42af-b943-bfda45a897d7" style="width:62.5%" class="column"><pre id="0a51c6e4-ea5f-43db-b18f-bae14fe0d3d6" class="code"><code>#! /bin/python3
+
+def drawTriangle(l):
+    seq = range(1,l+1)
+    if (l&lt;0):
+        seq = range(-l,0,-1)
+    for i in seq:
+        print(&quot;*&quot;*i)
+        
+def main():
+    drawTriangle(5)
+    print()
+    drawTriangle(-5)
+    
+if __name__==&quot;__main__&quot;:
+    main()
+    exit(0)</code></pre></div><div id="acbbde5b-f89d-4024-8a98-fa336efd8ce8" style="width:37.5%" class="column"><figure id="671749b2-1e81-4166-b156-f6cf4fe91018" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%201.png"><img style="width:84px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%201.png"/></a></figure></div></div><p id="71c96f7c-2866-46b2-b526-8421d1d48ab7" class="block-color-red"><mark class="highlight-pink"><strong>Template 2 : Input integer/float/string data from the terminal and output the result after processing.</strong></mark></p><div id="5f9f78bd-2009-495f-81a8-a45829d222f5" class="column-list"><div id="b3b60976-ae3f-42a4-9828-e544e24e0f60" style="width:62.5%" class="column"><pre id="118a17df-5ec0-49ad-99bb-4dbd64aaa80b" class="code"><code>#! /bin/python3
+
+def doSomething(a,b):
+    print(a+b)
+
+def main():
+    a, b = [int(v) for v in input().split()]
+    doSomething(a,b)
+ 
+if __name__==&quot;__main__&quot;:
+    main()
+    exit(0)</code></pre></div><div id="346168a3-b3e6-4b07-86f0-94e4385d50c3" style="width:37.50000000000001%" class="column"><figure id="6f5c470b-d816-437b-bd99-b0b731799397" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%202.png"><img style="width:144px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%202.png"/></a></figure></div></div><div id="5b8b0ec1-0606-4110-80ea-0e0b01a09536" class="column-list"><div id="90d2c065-ea4d-4ba9-a2e8-ce82e6b9ec12" style="width:62.5%" class="column"><pre id="fb5b74f4-c5e9-4cfe-8882-6e60edb3c611" class="code"><code>#! /bin/python3
+
+def sum(nums):
+    s = 0
+    for n in nums:
+        s+=n
+    return s
+
+def main():
+    nums = [int(v) for v in input().split()]
+    print(sum(nums))
+ 
+if __name__==&quot;__main__&quot;:
+    main()
+    exit(0)</code></pre></div><div id="050e4a2c-ee15-4ca1-abc7-26e15afeb726" style="width:37.5%" class="column"><figure id="10f71cdb-05ed-4906-bce8-1b7634f2a610" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%203.png"><img style="width:144px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%203.png"/></a></figure><p id="8f9dc66b-2af8-400a-b11d-abacdbf86031" class="">
+</p></div></div><h2 id="ac80673b-88b4-4a14-8d69-fa1a4066f877" class="block-color-teal_background">Exercises and Assignments</h2><p id="e0bd8322-ca03-4f43-b846-952de02e94ac" class="block-color-gray_background">Exercise 1: Please refer to Assignment Template 1 and print an equilateral triangle with 8 layers.</p><div id="888c5758-8f1e-4dd1-9f33-7c95b85d1af6" class="column-list"><div id="db044a70-4449-424f-a95e-16423f59f75a" style="width:62.5%" class="column"><pre id="f4043f3d-d4fb-4917-9677-5ac25e97aa15" class="code"><code>def drawRTriangle(l):
+    for i in range(1,l+1):
+        print(&quot; &quot;*(l-i)+&quot;*&quot;*(i*2-1))
+        
+def main():
+    drawRTriangle(8)
+    
+if __name__==&quot;__main__&quot;:
+    main()
+    exit(0)</code></pre></div><div id="d6b5bb6b-6e72-4bd8-a65f-f534418df059" style="width:37.5%" class="column"><figure id="e3e3f8f4-bc1c-4be0-8bf1-3807c8a0dbec" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%204.png"><img style="width:120px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%204.png"/></a></figure><p id="d6b28e6e-c8cb-4b2a-b46b-83df4ae32725" class="">
+</p></div></div><p id="57ba758c-c005-42db-aa3b-a9b211e51441" class="block-color-default">
+</p><p id="7892ee6d-33ac-48ad-b8fb-c2a3f810c3c8" class="block-color-gray_background">Exercise 2: Please refer to Assignment Template 2, input a floating-point sequence from the terminal, and after comparison, print the maximum value in the sequence.</p><pre id="b87f94eb-c73b-43d7-9647-4cc690807c45" class="code"><code>#! /bin/python3
+
+def maxF(nums):
+    m = nums[0]
+    for f in nums[1:]:
+        if f&gt;m:
+            m = f
+    return m
+
+def main():
+    nums = [float(v) for v in input().split()]
+    print(maxF(nums))
+ 
+if __name__==&quot;__main__&quot;:
+    main()
+    exit(0)</code></pre><figure id="12537a6d-46fa-4f47-b404-2ee0012e674f" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%205.png"><img style="width:432px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%205.png"/></a></figure><p id="a1dc472e-db6b-4f78-8419-576da795f597" class="block-color-default">
+</p><p id="5be6db4d-b9a5-4796-816a-a95f34235227" class="block-color-gray_background">Assignment 01 - Snakify Python Exercises</p><ul id="49a28a6c-baaa-44bd-aebd-99814dcf82a9" class="bulleted-list"><li style="list-style-type:disc">Please practice all the problems in<a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/"> Lesson 4</a>.</li></ul><ul id="88be8c1c-67ad-4fb4-8a1b-dd8fe3307dc5" class="bulleted-list"><li style="list-style-type:disc">Be sure to register and log in to your Snakify account beforehand.</li></ul><div id="c2596683-c77e-46f2-bf14-f81780dad9e0" class="column-list"><div id="f3dfb150-f3bb-44cc-885f-45a4b9ecdec7" style="width:50%" class="column"><figure id="e77aa11b-253f-4fbb-a1e8-012ac968e554" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%206.png"><img style="width:108px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%206.png"/></a></figure><p id="34bcf6f2-f13e-46b9-a68b-f8abc43b8730" class="">
+</p></div><div id="97c23a72-893d-4764-9699-2b93648f97ec" style="width:50%" class="column"><figure id="0062321d-78bc-48d2-b953-95204b016bf1" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%207.png"><img style="width:576px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/Untitled%207.png"/></a></figure></div></div><p id="d738d281-7107-4c41-81c3-3fbae1a6be81" class="">
+</p><figure id="c3732775-961c-4f72-83ad-9f71bf0cd076" class="image"><a href="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/5.png"><img style="width:1500px" src="MCU%20MPU%20Development%20Platform%2021d0a71490f04b249f1db6d451480228/5.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
