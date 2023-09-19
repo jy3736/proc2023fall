@@ -1,0 +1,840 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Python Fundamentals (2/6)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="dfab7b88-ebc4-46ce-a033-c94bd28a4dee" class="page sans"><header><img class="page-cover-image" src="Python%20Fundamentals%20(2%206)%20dfab7b88ebc446cea033c94bd28a4dee/notion-Python_(1).png" style="object-position:center 31.08%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Python%20Fundamentals%20(2%206)%20dfab7b88ebc446cea033c94bd28a4dee/yang01.png"/></div><h1 class="page-title">Python Fundamentals (2/6)</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="0517314f-3ee2-4f01-bc0e-dbc6a023269d" class="">
+</p><p id="d48cac43-8d4c-4bc6-8a14-30d6316dccc6" class="">This week, we will learn two topics:</p><ol type="1" id="584f9d01-5c18-436c-94c8-3a05d6bdd3fb" class="numbered-list" start="1"><li>Number data types (integer and float)</li></ol><ol type="1" id="b19d1c9d-7e47-416a-b2a4-d02ccf4631ba" class="numbered-list" start="2"><li>Conditional statements.</li></ol><p id="7b0e7c0e-be26-4c7a-8031-dcdc80de6213" class="">We will use Snakify&#x27;s problem sets to understand the fundamentals of these topics. Afterwards, students will be asked to practice the remaining Snakify online problems from Lessons 2 and 3.</p><h1 id="57399b75-4440-4cc0-be2e-6d30ba40411e" class="block-color-teal_background">References</h1><h3 id="fb6ef559-8370-4e4f-be46-e50d64c8362f" class="block-color-yellow">Online Python 3 Tutorials - Snakify</h3><figure id="c86e065a-09ce-4602-9083-12aa0e50b333"><a  target="_blank" href="https://snakify.org/en/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Snakify - Python 3 Interactive Course</div><div class="bookmark-description">Teach Python 3 and web design with 200+ exercises - Learn Python 3 - Snakify Welcome to our interactive manual of Python 3 programming language. This is an introductory course that is way different from the others.</div></div><div class="bookmark-href"><img src="https://snakify.org/static/favicon.ico?3c9fe09" class="icon bookmark-icon"/>https://snakify.org/en/</div></div><img src="https://snakify.org/static/images/pony.png" class="bookmark-image"/></a></figure><h3 id="af24d980-237b-46f2-b8e8-cfd83c2b2361" class="block-color-yellow">Official Python Online Documentation</h3><figure id="a00a5503-712f-4f8f-8bdf-f48ddbaa9149"><a  target="_blank" href="https://docs.python.org/3/index.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">3.11.1 Documentation</div><div class="bookmark-description">Welcome! This is the official documentation for Python 3.11.1.</div></div><div class="bookmark-href"><img src="https://docs.python.org/favicon.ico" class="icon bookmark-icon"/>https://docs.python.org/3/index.html</div></div></a></figure><h1 id="ac358c6e-ede4-4f2a-a6a5-d478a158348a" class="block-color-brown_background">Class Activities</h1><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7116c85c-1054-4b5a-9327-893302b16639"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(2%206)%20dfab7b88ebc446cea033c94bd28a4dee/yang02.png"/></div><div style="width:100%">This Week&#x27;s Topics:<ol type="1" id="37d3eaeb-e49e-4494-abea-d103a19ac4c1" class="numbered-list" start="1"><li>A Comprehensive Exploration of Python Numbers, Covering Integers and Floating-Point Numbers.</li></ol><ol type="1" id="55605d2d-7848-4b80-a2eb-e6dfd98c5d89" class="numbered-list" start="2"><li>Utilizing Conditional Statements, Specifically the If-Then-Else Structure.</li></ol><ol type="1" id="6dce582d-13ad-47d0-8437-bae8790b7434" class="numbered-list" start="3"><li>Delving into Problem Solving and Discussion for Snakify Lessons 2 and 3.</li></ol><p id="0e5e04bc-a8eb-4a30-9425-83e73845425a" class="">
+Source : Snakify.org
+<a  target="_blank" href="https://snakify.org/en/lessons/integer_float_numbers/"><strong>Lesson 2 : Integer and float numbers</strong></a></p><p id="647dfe4e-41b2-40ac-8c6c-1a2adc9c08da" class=""><a  target="_blank" href="https://snakify.org/en/lessons/if_then_else_conditions/"><strong>Lesson 3 : Conditions: if, then, else</strong></a></p></div></figure><h3 id="669a0b99-cb97-4dfb-905b-17a8f0e2d571" class="block-color-gray_background">Exercise 1: <strong><strong>Merge two numbers</strong></strong></h3><div id="79ff6d10-400a-4bc5-b6a2-a6b3d2c12271" class="column-list"><div id="8c98e5cd-4d98-4bc6-a287-e4a3cd80be63" style="width:50%" class="column"><ul id="58b87b08-8a43-4d66-99e7-9c17a35eb942" class="bulleted-list"><li style="list-style-type:disc">Given two two-digit numbers, merge their digits as shown in the tests below.</li></ul><ul id="ac8d99f7-90e9-4e19-a959-6f12f66f55ab" class="bulleted-list"><li style="list-style-type:disc">The input must be processed as integers and must not be converted to strings. </li></ul><ul id="ac18d751-17b1-4a1e-a655-081a3a1cae48" class="bulleted-list"><li style="list-style-type:disc">It is not allowed to use string concatenation to solve this problem.</li></ul><p id="69c978ea-6934-40ea-b974-15821c2088e0" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5df86fa8-c1a1-4016-a31e-2eed79f6783d"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="9a023577-2987-47bd-bee7-91f8bfc04063" class="code"><code>a = int(input())
+b = int(input())
+tens_a = a // 10
+units_a = a % 10
+tens_b = b // 10
+units_b = b % 10
+print(tens_a * 1000 + tens_b * 100 + units_a * 10 + units_b)</code></pre><p id="0a6d80f7-0188-4152-81a3-88dc8b55581b" class="">
+</p></div><div id="5679c6c6-391b-48b0-a4bd-921f5d860ca4" style="width:50.000000000000014%" class="column"><pre id="6f934dbe-ef6e-472a-b98b-503d9a459a55" class="code code-wrap"><code>Test case 1:
+Input:
+12
+34
+Output: 
+1324
+
+Test case 2:
+Input: 
+11
+22
+Output: 
+1212
+
+Test case 3:
+Input: 
+13
+24
+Output: 
+1234</code></pre></div></div><h3 id="826b83d7-fe11-4548-9204-854e038fbeaa" class="block-color-gray_background">Exercise 2: <strong><strong>Day of week</strong></strong></h3><div id="87e284d2-7ef7-4cf4-a429-788a037e9f6f" class="column-list"><div id="82d710e4-72c7-42a7-bb4a-de8bc5b56497" style="width:50%" class="column"><ul id="585152df-dca0-45c7-9244-c8d5fa7df4aa" class="bulleted-list"><li style="list-style-type:disc">Given an integer K in the range 1 to 365, determine the day of the week for the K-th day of the year, assuming January 1 of that year is Thursday. </li></ul><ul id="4ae2da3d-0dfa-4d0f-8021-cb4153621a73" class="bulleted-list"><li style="list-style-type:disc">The days of the week are numbered as follows: Sunday is 0, Monday is 1, Tuesday is 2, ..., and Saturday is 6.</li></ul><p id="e4e62a94-0ae0-47f8-bb07-daa2af22de78" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0e4c3ad8-6575-4720-8be7-5a6aad74f0fd"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="1ea1c81c-45ff-430c-a81c-8c9287702497" class="code"><code>k = int(input())
+print((k + 3) % 7)</code></pre><p id="298efca6-989d-4db0-aac8-5d149118fa4d" class="">
+</p></div><div id="3d108abc-97ac-468d-a0e3-4e81272d1407" style="width:50%" class="column"><pre id="d8f3eb21-b0db-4aa8-8347-8873ca968fd0" class="code code-wrap"><code>Test case 1:
+Input: 1
+Output 4
+
+Test case 2:
+Input: 3
+Output 6
+
+Test case 3:
+Input: 205
+Output 5
+
+Test case 4:
+Input: 300
+Output 2</code></pre></div></div><h3 id="39c6f092-cd28-45a5-854d-8aaa4cc7d3b5" class="block-color-gray_background">Exercise 3: <strong><strong>Snail</strong></strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=8faaae18-d718-46a4-b9a8-8a17a7674c41&episode=e1cfa958-7eb6-4372-86b0-6a1b2c9f0714" id="soundon"></iframe></div><div id="94fe395e-be71-43d9-919c-34a85d73c7ec" class="column-list"><div id="d7da218d-b3a1-47c3-a1c1-b58a3ed30d9a" style="width:50%" class="column"><ul id="a0a58e0b-d35a-4ddb-92e5-b5dce9c9bc27" class="bulleted-list"><li style="list-style-type:disc">A snail goes up A feet during the day and falls B feet at night. How long does it take him to go up H feet?</li></ul><ul id="36eab89e-fc79-48c2-930d-24ada0f40531" class="bulleted-list"><li style="list-style-type:disc">Given three integer numbers H, A and B (A &gt; B), the program should output a number of days.</li></ul><pre id="25c53778-a3ec-41bf-99a5-f4f577f7beb2" class="code code-wrap"><code>Test case 1:
+Input:
+10
+3
+2
+Output:
+8
+
+Test case 2:
+Input:
+20
+7
+3
+Output:
+5
+
+Test case 3:
+Input:
+19
+7
+3
+Output:
+4</code></pre></div><div id="bce23865-8350-46fe-aa6d-f08fa3a8a833" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="db4fb0f5-9991-46b8-85e6-06968c7a4a02"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solutiion</div></figure><pre id="7205de2c-fc2c-4af7-9110-454161ab4d1f" class="code"><code>from math import ceil
+
+h = int(input())
+a = int(input())
+b = int(input())
+print(ceil((h - a) / (a - b)) + 1)</code></pre><p id="9ee74266-5fce-4c2f-8ea1-705bd0f87418" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="50f2b21f-06ab-4557-acf1-e0bfc21e6bb3"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(2%206)%20dfab7b88ebc446cea033c94bd28a4dee/yang02%201.png"/></div><div style="width:100%">Other ways to perform a ceiling function</div></figure><pre id="cdd3376a-3d56-4966-8969-ac061827aa37" class="code"><code>h = int(input())
+a = int(input())
+b = int(input())
+
+print(-(-(h - a)//(a - b)) + 1)</code></pre><p id="06c43b55-768a-4e6e-9d40-89fe467e9eed" class="">
+</p></div></div><h3 id="83aba687-8dfc-4d46-8498-bf5764a2da18" class="block-color-gray_background">Exercise 4: <strong><strong>Distance to closest point</strong></strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=8faaae18-d718-46a4-b9a8-8a17a7674c41&episode=d412fc24-3d97-4962-ac23-3fac7aa70bad" id="soundon"></iframe></div><div id="526a976c-13b5-4a4c-8da2-26f6b2e6ced7" class="column-list"><div id="a67a00b9-5fb8-4539-9c87-63476f98add6" style="width:50%" class="column"><p id="d40a7140-fe33-4e2f-97ba-8a759dad5c57" class="">Write a program to calculate the shortest distance between a given point <code>A</code> and either point <code>B</code> or <code>C</code> on a line. Provide the coordinates of all three points as input.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="797819c3-7204-4251-a072-f0bae5be3395"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="dafed4de-26ca-4d9c-983c-b6ba4eb9c259" class="code"><code>a = int(input())
+b = int(input())
+c = int(input())
+
+a_to_b = abs(a - b)
+a_to_c = abs(a - c)
+
+if a_to_b &lt; a_to_c:
+    print(a_to_b)
+else:
+    print(a_to_c)</code></pre><pre id="94f1b1fe-7d96-4c53-ae13-d4caf4effe20" class="code code-wrap"><code>Test case 1:
+Input:
+10
+35
+30
+Output:
+20
+
+Test case 2:
+Input:
+35
+30
+10
+Output:
+5</code></pre></div><div id="4109ca94-4fad-4ac8-a02a-ebaf4c6241bb" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d99d3948-a1e4-4ec7-9e02-0bd07fed959b"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(2%206)%20dfab7b88ebc446cea033c94bd28a4dee/yang02%201.png"/></div><div style="width:100%">Other ways to solve this problem without using the <code>abs()</code> function.</div></figure><pre id="03d62a59-d755-4e1c-9a3a-dcd47713a4be" class="code code-wrap"><code>a = int(input())
+b = int(input())
+c = int(input())
+
+a_to_b = a - b
+a_to_c = a - c
+
+if a_to_b &lt; 0:
+    a_to_b = -a_to_b
+if a_to_c &lt; 0:
+    a_to_c = -a_to_c
+
+if a_to_b &lt; a_to_c:
+    print(a_to_b)
+else:
+    print(a_to_c)
+</code></pre><p id="186fe108-08b6-46bd-879d-32a77d049a19" class="">
+</p><pre id="ea172385-45dc-487e-971a-a907706f7ef1" class="code code-wrap"><code>Test case 3:
+Input:
+100
+151
+149
+Output:
+49</code></pre></div></div><h3 id="1ce6cf05-0534-415d-a706-5b1f5e51b725" class="block-color-gray_background">Exercise 5 <strong><strong>Four-digit palindrome</strong></strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=8faaae18-d718-46a4-b9a8-8a17a7674c41&episode=016627c5-9358-4dc8-a2cd-9bc5f8a6afc1" id="soundon"></iframe></div><div id="60018bd0-c1c8-405d-b185-0181718f4f09" class="column-list"><div id="68f30b2b-6b8d-4606-bb84-69d9e7a27a41" style="width:50%" class="column"><ul id="0b8c0ee7-0c60-4c48-9409-d252194ef254" class="bulleted-list"><li style="list-style-type:disc">Write a program that takes a four-digit integer and checks if it&#x27;s a palindrome. If it is, print &quot;YES&quot;, otherwise print &quot;NO&quot;. </li></ul><ul id="1d323ec8-364c-4b9c-8a2b-07eca34ee774" class="bulleted-list"><li style="list-style-type:disc">A palindrome is a number that reads the same forwards as it does backwards.</li></ul><ul id="10ac4823-d362-4bf8-8621-3aff8cf742e7" class="bulleted-list"><li style="list-style-type:disc">The program must only use numerical data types and must not involve any other data types.<pre id="5e243303-e20f-4234-aa94-ffbc3cc71fe1" class="code code-wrap"><code>Test case 1:
+Input: 1234
+Output: NO
+
+Test case 2:
+Input: 3443
+Output: YES
+
+Test case 3:
+Input: 2222
+Output: YES
+
+Test case 4:
+Input: 1221
+Output: YES</code></pre></li></ul><p id="c05af87c-4def-47c3-bf72-c7e81b53836f" class="">
+</p><p id="972561a9-8800-4e97-aa6e-96103ac86ebc" class="">
+</p></div><div id="bf6948a0-7574-4f3e-8e86-748c71ffa2fc" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fb6a6150-70b0-4e38-b65f-394f58b3929c"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solutiion</div></figure><pre id="71c330e7-c97b-45cd-b00e-cbcf8d3c0d26" class="code"><code>number = int(input())
+a = number // 1000
+b = number // 100 % 10
+c = number // 10 % 10
+d = number % 10
+if a == d and b == c:
+    print(&#x27;YES&#x27;)
+else:
+    print(&#x27;NO&#x27;)</code></pre><p id="e4cc0173-c3af-4ada-b385-5dd56def9cef" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="76ad6f8b-c661-49eb-bb1c-e52cc1dbdd17"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(2%206)%20dfab7b88ebc446cea033c94bd28a4dee/yang02%201.png"/></div><div style="width:100%">Other ways to solve this problem.</div></figure><pre id="325ba388-2443-47f5-9105-315e2bf3fe66" class="code"><code>a = int(input())
+
+if (a%10!=a//1000):
+    print(&quot;NO&quot;)
+elif (a%100//10!=a//100%10):
+    print(&quot;NO&quot;)
+else:
+    print(&quot;YES&quot;)</code></pre></div></div><p id="499e04a4-0eef-4fba-a582-b470c862d457" class="">
+</p><h3 id="ed9b4006-64b9-4c98-9415-1f03b45181b9" class="block-color-gray_background">Assignment 1: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="4f4e42ea-3fd0-4164-b29a-1e1ccbdae1b8" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and solve the following problems. You must use your account to complete these online exercises in order to earn assignment points.</li></ul><ul id="be8217ca-1518-422d-86f6-7b87b3ab6e79" class="bulleted-list"><li style="list-style-type:disc">You need to finish lessons 4 on Snakify.</li></ul><p id="a847736c-f6fd-4c9e-af90-c9dd83412fb7" class="">
+</p><p id="0df85baa-e25b-4fb3-82ca-ed4cff0b7505" class="">
+</p><figure id="0a1d11fb-be29-4b1a-bd4d-ec6a446bb1ff" class="image"><a href="Python%20Fundamentals%20(2%206)%20dfab7b88ebc446cea033c94bd28a4dee/17.png"><img style="width:1500px" src="Python%20Fundamentals%20(2%206)%20dfab7b88ebc446cea033c94bd28a4dee/17.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
