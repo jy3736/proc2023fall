@@ -1,0 +1,803 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Python Fundamentals (3/6)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="7eb02147-1369-4a81-b70b-5572b083386e" class="page sans"><header><img class="page-cover-image" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/notion-Python_(1).png" style="object-position:center 31.08%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/yang01.png"/></div><h1 class="page-title">Python Fundamentals (3/6)</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="69c8724d-6354-4250-b315-1bce8afed468" class="block-color-teal_background">References</h2><h3 id="84a1db86-3d58-4da2-931a-4ae7dd24e833" class="block-color-yellow">Online Python 3 Tutorials - Snakify</h3><figure id="5b4b0ebc-9c04-4061-be35-c8a5187a29f1"><a  target="_blank" href="https://snakify.org/en/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Snakify - Python 3 Interactive Course</div><div class="bookmark-description">Teach Python 3 and web design with 200+ exercises - Learn Python 3 - Snakify Welcome to our interactive manual of Python 3 programming language. This is an introductory course that is way different from the others.</div></div><div class="bookmark-href"><img src="https://snakify.org/static/favicon.ico?3c9fe09" class="icon bookmark-icon"/>https://snakify.org/en/</div></div><img src="https://snakify.org/static/images/pony.png" class="bookmark-image"/></a></figure><h3 id="556cd61a-1618-4498-8317-31f8c234c039" class="block-color-yellow">Official Python Online Documentation</h3><figure id="ac993640-a857-4dc4-8ea8-f1326745f00e"><a  target="_blank" href="https://docs.python.org/3/index.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">3.11.1 Documentation</div><div class="bookmark-description">Welcome! This is the official documentation for Python 3.11.1.</div></div><div class="bookmark-href"><img src="https://docs.python.org/favicon.ico" class="icon bookmark-icon"/>https://docs.python.org/3/index.html</div></div></a></figure><h2 id="99eae505-2909-4428-89ba-6dacb3777a55" class="block-color-teal_background">Class Activities</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c7a66d7f-1f71-458d-b0e7-80f13715c77f"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/yang04b.png"/></div><div style="width:100%">This week, the course covers the following topics in Python programming:<ul id="36993772-ea31-492c-b78e-c21d32f38c24" class="bulleted-list"><li style="list-style-type:disc">For loops and the range function: Students will learn how to use for loops to iterate through a range of values and perform certain operations on each iteration. They will also learn how to use the range function to generate sequences of numbers to use in for loops.</li></ul><ul id="5cbdc66e-8fa1-4295-9316-088c3f19f9a2" class="bulleted-list"><li style="list-style-type:disc">Functions: Students will learn how to define and call functions in Python, and how to pass arguments and return values. They will also learn how to use built-in functions and how to create their own functions.</li></ul><p id="55512723-4025-4e0f-8fdd-cbb57432d230" class="">Throughout the week, students will have the opportunity to practice their new skills through a variety of coding exercises. After completing this lecture, students will have a solid understanding of for loops with ranges and functions in Python.</p><p id="a88488be-6e77-413c-aa7c-696369b8c436" class="">
+</p><p id="d7026283-28e2-466c-aa7f-f4fa2bbdd461" class="">Source : Snakify.org</p><p id="155ef254-a142-411a-89e9-e4ab489897ff" class=""><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/"><strong>Lesson 4 : For loop with range</strong></a></p><p id="eb8f4a2f-d16e-45c6-a994-191eca0e6ce6" class=""><strong><a  target="_blank" href="https://snakify.org/en/lessons/functions/">Lesson 8 : Functions and recursion</a></strong></p></div></figure><p id="1a4b11f8-f316-4f85-9670-bdf51a6fb5a1" class="">
+</p><h3 id="79f8ff64-21fd-4e23-9095-e4c05d0faf4a" class="block-color-gray_background">Exercise 1: <strong><strong>Product of N numbers</strong></strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=8faaae18-d718-46a4-b9a8-8a17a7674c41&episode=6b1996c2-4d43-4200-a647-c02918815899" id="soundon"></iframe></div><ul id="3d2c4965-446d-4e0c-bae6-777025f92ad9" class="bulleted-list"><li style="list-style-type:disc">Given N integers in the input, read them and output their product. </li></ul><ul id="52864568-1813-4c3f-8737-f0d235041d6e" class="bulleted-list"><li style="list-style-type:disc">The first line of input will contain a positive integer N, representing the number of integers that will be inputted in the following N lines. </li></ul><ul id="43d37fd2-a0d4-4a7d-88ab-7a7d9157e4da" class="bulleted-list"><li style="list-style-type:disc">Print the product of these N integers.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c731023d-5baa-44ea-9c98-37e1ffcc07a7"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/yang02.png"/></div><div style="width:100%">Example Solution<pre id="aaa77351-fc42-42ba-b77f-285b99d9208b" class="code code-wrap"><code>n = int(input())
+product = 1
+
+for i in range(n):
+    num = int(input())
+    product *= num
+
+print(product)</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2fef509a-bbdd-4741-addf-74dfb20bf30c"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Program Output<pre id="f857b7b3-1192-4eae-978c-da33ca2f847f" class="code"><code>PS week04&gt; Get-Content .\dat01a.txt                    
+5
+1
+2
+3
+4
+5
+PS week04&gt; Get-Content .\dat01a.txt | python .\lab01.py
+120
+
+PS week04&gt; Get-Content .\dat01b.txt 
+8
+2
+2
+2
+2
+2
+2
+2
+2
+PS week04&gt; Get-Content .\dat01b.txt | python .\lab01.py
+256</code></pre></div></figure><h3 id="d3aa9bc9-9f90-4d2e-bbb1-3958005126ff" class="block-color-gray_background">Exercise 2: <strong><strong>Squares in range</strong></strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=8faaae18-d718-46a4-b9a8-8a17a7674c41&episode=e1a55d9b-1445-42c4-b562-fd595e17d9f8" id="soundon"></iframe></div><ul id="0f73fab1-2ef4-4544-a1a6-684de19794aa" class="bulleted-list"><li style="list-style-type:disc">Print the squares of all integers between A and B inclusive, without spaces around the * and = symbol. </li></ul><ul id="bc9ca4c1-3eba-498a-a5ef-c30cd4b963b7" class="bulleted-list"><li style="list-style-type:disc">Use the sep argument in the print() function to achieve this.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1e1f30d1-3bba-427e-a980-c2befea90d49"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/yang02.png"/></div><div style="width:100%">Example Solution<pre id="632e5473-a279-4f02-a8d4-f74de9f52ffc" class="code"><code>a = int(input())
+b = int(input())
+
+for i in range(a, b+1):
+    print(i, &quot;*&quot;, i, &quot;=&quot;, i*i, sep=&#x27;&#x27;)</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="794ba3bd-e9f2-4d72-bf73-554605fbda62"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Program Output<pre id="870c7338-905e-4d90-a74b-d41b1843c9d0" class="code"><code>PS week04&gt; echo 6 9 | python .\lab02.py 
+6*6=36
+7*7=49
+8*8=64
+9*9=81
+
+PS week04&gt; echo 1 5 | python .\lab02.py
+1*1=1
+2*2=4
+3*3=9
+4*4=16
+5*5=25</code></pre></div></figure><p id="8bc2245c-fec0-455c-abda-3f53349f69fb" class="">
+</p><h3 id="5057eda8-c4f9-4066-b5fd-a66825e6124d" class="block-color-gray_background">Exercise 3: <strong><strong>Is prime</strong></strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=8faaae18-d718-46a4-b9a8-8a17a7674c41&episode=1726addd-8883-4445-802b-651303a47d8f" id="soundon"></iframe></div><ul id="256679ba-f93f-42af-a10c-793c64e7e9fc" class="bulleted-list"><li style="list-style-type:disc">Determine if a given integer N &gt; 1 is a prime number and print PRIME if it is, and print COMPOSITE if it is not. </li></ul><ul id="21092b64-547b-41cf-8149-1061c78982f9" class="bulleted-list"><li style="list-style-type:disc">A prime number is a natural number greater than 1 that is only divisible by 1 and itself.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b7a065df-e8ae-419b-83e9-efda78268f78"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/yang02.png"/></div><div style="width:100%">Example Solution<pre id="20e0912b-2cde-4260-9912-19c79093d5e2" class="code code-wrap"><code>N = int(input())
+
+if N &lt;= 1:
+    print(&quot;COMPOSITE&quot;)
+else:
+    for i in range(2, N-1):
+        if N % i == 0:
+            print(&quot;COMPOSITE&quot;)
+            break
+    else:
+        print(&quot;PRIME&quot;)</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8cd57b81-bfa9-402a-ad3c-e5d9d342b11e"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/yang04b%201.png"/></div><div style="width:100%">A better way to quickly determine which numbers are prime.<pre id="008c0de1-701d-49e4-88e3-926338bc7cdc" class="code code-wrap"><code>import math
+
+N = int(input())
+if N &lt;= 1:
+    print(&quot;COMPOSITE&quot;)
+elif N &lt;= 3:
+    print(&quot;PRIME&quot;)
+elif N % 2 == 0 or N % 3 == 0:
+    print(&quot;COMPOSITE&quot;)
+else:
+    for i in range(5, int(math.sqrt(N))+1, 6):
+        if N % i == 0 or N % (i+2) == 0:
+            print(&quot;COMPOSITE&quot;)
+            break
+    else:
+        print(&quot;PRIME&quot;)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="73e60127-7db7-4a8a-8f0b-350114e0ab58"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">When determining whether a number N is a prime or not, it is only required to check up to the square root of N (i.e., sqrt(N)) because of a mathematical property of prime numbers.<p id="e1f4ac00-8d93-4495-a003-5d032c7b7741" class="">The property is that every composite number (i.e., a number that is not prime) can be factored into two factors that are both less than or equal to its square root. In other words, if N is composite, then there exist two factors a and b, where a and b are both integers and a*b = N, and both a and b are less than or equal to sqrt(N).</p><p id="6ef0b047-5654-4406-a1e6-442d9e7f0f8a" class="">The script starts by iterating through a range of numbers <code><strong>i</strong></code>starting from 5 and going up to the square root of <code><strong>N</strong></code>. The step size is set to 6, which means that <code><strong>i</strong></code>
+ and <code><strong>i+2</strong></code>are alternately checked for divisibility. This is because all primes greater than 3 can be written in the form <code>6k±1</code>, so only checking every 6th number starting from 5, and alternating between checking <code><strong>i</strong></code>and <code><strong>i+2</strong></code>, can skip a lot of unnecessary checks.</p></div></figure></div></figure><h3 id="5b47e242-cb99-4924-95c8-338083abc3e5" class="block-color-gray_background">Exercise 4: <strong><strong>Print primes in range</strong></strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=8faaae18-d718-46a4-b9a8-8a17a7674c41&episode=eb9931bb-9f77-412e-bf1b-1ed161add621" id="soundon"></iframe></div><ul id="98644048-a9fc-4e7b-ba7a-2e77a902eb04" class="bulleted-list"><li style="list-style-type:disc">Given two integers A and B, print all prime numbers between A and B, including A and B if they are prime. </li></ul><ul id="5e56d171-29c5-4124-a5a8-0ed03811982e" class="bulleted-list"><li style="list-style-type:disc">A prime number is defined as a natural number greater than 1 that is only divisible by 1 and itself, with no other positive factors.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="aacd174c-f9b5-4326-926c-269b4190aa9c"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/yang02.png"/></div><div style="width:100%">Example Solution<pre id="01b725d3-aad1-4940-adf8-6acc1f1eb54b" class="code code-wrap"><code>def is_prime(N):
+    if N &lt;= 1:
+        return False
+    for i in range(2, N):
+        if N % i == 0:
+            return False
+    return True
+
+def main():    
+	a = int(input())
+	b = int(input())
+	for n in range(a,b+1):
+	    if is_prime(n): print(n)
+
+if __name__==&quot;__main__&quot;:
+	main()</code></pre></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6ab6b3eb-e9c9-4f84-af3c-0cf5c2fd0f1b"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Program Output<pre id="b8512721-637e-4874-b0e8-7bf16648fc20" class="code"><code>PS week04&gt; echo 1 20 | python .\lab04.py   
+2
+3
+5
+7
+11
+13
+17
+19
+
+PS week04&gt; echo 100 150 | python .\lab04.py
+101
+103
+107
+109
+113
+127
+131
+137
+139
+149</code></pre></div></figure><h3 id="b86a3443-05c7-4e95-9e61-b827da93cd56" class="block-color-gray_background">Exercise 5: <strong><strong>Number of primes in range</strong></strong></h3><div><iframe src="https://player.soundon.fm/embed/?podcast=8faaae18-d718-46a4-b9a8-8a17a7674c41&episode=30eeb171-3373-4da8-a91c-723b8b97252b" id="soundon"></iframe></div><ul id="6c59560a-51e0-48dc-80f4-841bd8f04dcc" class="bulleted-list"><li style="list-style-type:disc">Given two integers A and B, determine the count of prime numbers between A and B, including A and B if they are prime. </li></ul><ul id="4f844ad7-6c45-46aa-a545-307065a34fe4" class="bulleted-list"><li style="list-style-type:disc">A prime number is defined as a natural number greater than 1 that is only divisible by 1 and itself, with no other positive factors. </li></ul><ul id="f21047af-b361-45c5-b422-b7e8dcf027e3" class="bulleted-list"><li style="list-style-type:disc">Print the total number of prime numbers found in the given range.</li></ul><pre id="e81578bf-5a07-4d95-95d0-07ede23f6eaf" class="code code-wrap"><code>import math
+
+def count_primes(A, B):
+    count = 0
+    for num in range(A, B+1):
+        if num &gt; 1:
+            for i in range(2, int(math.sqrt(num))+1):
+                if num % i == 0:
+                    break
+            else:
+                count += 1
+    return count
+
+a = int(input())
+b = int(input())
+
+print(count_primes(a,b))</code></pre><h3 id="9705af22-6f79-43fe-bbdd-59093bfe39fe" class="block-color-gray_background">Assignment 1: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="6af4c7cc-2589-4231-a01c-acffe754b607" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and complete the following problems.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="11373a9f-3d24-47e5-b053-3211818ecb4f"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%"><strong>Lesson 4 : For loop with range</strong><p id="3696bb06-6b0e-4085-8aff-5b7ea49d5e1d" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/series_1/"><strong><strong>Series - 1</strong></strong></a><strong><strong>»</strong></strong></p><p id="29b95b89-581c-4b8c-a414-00793c8120f8" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/series_2/"><strong><strong>Series - 2</strong></strong></a><strong><strong>»</strong></strong></p><p id="ad822599-f7ad-413c-b2b9-1c1934e296b3" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/sum_of_ten_numbers/"><strong><strong>Sum of ten numbers</strong></strong></a><strong><strong>»</strong></strong></p><p id="cb46ef13-9545-4ceb-be04-4f251de182a1" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/suf_of_n_numbers/"><strong><strong>Sum of N numbers</strong></strong></a><strong><strong>»</strong></strong></p><p id="fe2ecdef-4cab-48c8-9004-1c0d9e378461" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/sum_of_cubes/"><strong><strong>Sum of cubes</strong></strong></a><strong><strong>»</strong></strong></p><p id="8fc8a711-d7c7-4585-8078-829b81bac62e" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/factorial/"><strong><strong>Factorial</strong></strong></a><strong><strong>»</strong></strong></p><p id="5ea265ff-6645-4543-b100-01febc926702" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/how_many_zeroes/"><strong><strong>The number of zeros</strong></strong></a><strong><strong>»</strong></strong></p><p id="d57a1d30-31f9-44bd-9907-d19076ca4595" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/sum_of_factorials/"><strong><strong>Adding factorials</strong></strong></a><strong><strong>»</strong></strong></p><p id="fa7ebb52-a43a-4c20-bfa7-936cd81f75a6" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/ladder/"><strong><strong>Ladder</strong></strong></a><strong><strong>»</strong></strong></p><p id="5343c33f-9a33-477d-9a26-53aab6689af3" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/for_loop_range/problems/lost_card/"><strong><strong>Lost card</strong></strong></a><strong><strong>»</strong></strong></p></div></figure><h3 id="b18a252d-cc4a-4045-9232-2c1d65fb579c" class="block-color-gray_background">Assignment 2: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="70f7ff50-d1b2-498c-8c10-9fe9916e8ba8" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and complete the following problems.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a881af2d-4555-43b5-87a7-66805282224c"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%"><strong>Lesson 8 : Functions and recursion</strong><p id="6d97b2bd-c8e7-49d0-8afe-132cfb2c4001" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/functions/problems/length_of_segment/"><strong><strong>The length of the segment</strong></strong></a><strong><strong>»</strong></strong></p><p id="c58e24c8-12b2-4381-99b8-4139b094b05e" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/functions/problems/negative_power/"><strong><strong>Negative exponent</strong></strong></a><strong><strong>»</strong></strong></p><p id="9ce9a9a2-21b2-4f44-b3c2-8638b5469d96" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/functions/problems/capitalize/"><strong><strong>Uppercase</strong></strong></a><strong><strong>»</strong></strong></p><p id="aedbdfc2-3e66-45e2-8cfc-9281fdcedc80" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/functions/problems/power_rec/"><strong><strong>Exponentiation</strong></strong></a><strong><strong>»</strong></strong></p><p id="5550490a-6d8c-497f-83ac-4583d73643dd" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/functions/problems/reverse_rec/"><strong><strong>Reverse the sequence</strong></strong></a><strong><strong>»</strong></strong></p><p id="d04f53d0-cee8-4cf8-b5d1-1e3222bd9ee5" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/functions/problems/fibonacci_rec/"><strong><strong>Fibonacci numbers</strong></strong></a><strong><strong>»</strong></strong></p></div></figure><p id="19dbe75c-3cef-4994-8ddf-23bc859f9b74" class="">
+</p><p id="44bba818-2094-46c0-9d73-f8d6c2a68e4d" class="">
+</p><figure id="b8eca3bd-ec18-4070-97a4-b99abc3a1fe8" class="image"><a href="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/20.png"><img style="width:1500px" src="Python%20Fundamentals%20(3%206)%207eb0214713694a81b70b5572b083386e/20.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
