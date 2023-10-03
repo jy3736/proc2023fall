@@ -1,0 +1,832 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Python Fundamentals (5/6)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="74d6444f-b48a-4467-9056-a6de32feb24a" class="page sans"><header><img class="page-cover-image" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/notion-Python_(1).png" style="object-position:center 31.08%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/yang01.png"/></div><h1 class="page-title">Python Fundamentals (5/6)</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="79886bda-74c2-489d-bf3e-fb16ad5f98c4" class="block-color-teal_background">References</h2><h3 id="651a6345-1823-40f0-a96f-cd3f9d055842" class="block-color-yellow">Online Python 3 Tutorials - Snakify</h3><figure id="b929e508-f4f6-4471-b98f-9a246ae648e4"><a  target="_blank" href="https://snakify.org/en/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Snakify - Python 3 Interactive Course</div><div class="bookmark-description">Teach Python 3 and web design with 200+ exercises - Learn Python 3 - Snakify Welcome to our interactive manual of Python 3 programming language. This is an introductory course that is way different from the others.</div></div><div class="bookmark-href"><img src="https://snakify.org/static/favicon.ico?3c9fe09" class="icon bookmark-icon"/>https://snakify.org/en/</div></div><img src="https://snakify.org/static/images/pony.png" class="bookmark-image"/></a></figure><h3 id="da345999-cef4-4945-9d44-9595704a6eaa" class="block-color-yellow">Official Python Online Documentation</h3><figure id="c1423e81-6b72-454a-9010-d54446927ffd"><a  target="_blank" href="https://docs.python.org/3/index.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">3.11.1 Documentation</div><div class="bookmark-description">Welcome! This is the official documentation for Python 3.11.1.</div></div><div class="bookmark-href"><img src="https://docs.python.org/favicon.ico" class="icon bookmark-icon"/>https://docs.python.org/3/index.html</div></div></a></figure><h2 id="166bffe1-39d0-4bb6-8247-5dbf95ab64e2" class="block-color-teal_background">Class Activities</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7d48133e-c26f-4f0b-a5cc-0def8c58596b"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/yang04b.png"/></div><div style="width:100%">This week, the course covers the following topics in Python programming:<ul id="e4678bd0-dacb-449d-bd53-60e0ecaf57de" class="bulleted-list"><li style="list-style-type:disc">We will delve deeper into the world of Python programming by exploring the collection data type known as lists. Specifically, we will cover both one-dimensional and two-dimensional lists.</li></ul><ul id="311997d7-bac6-41e1-ab72-5d218177c52e" class="bulleted-list"><li style="list-style-type:disc">A one-dimensional list, also known as a simple list, is an ordered collection of items, where each item is stored at a specific index. These items can be of any data type, including integers, strings, and other objects. We will learn how to create and manipulate one-dimensional lists using various methods such as indexing, slicing, and iteration.</li></ul><ul id="eb77f2bb-999c-4401-b3a7-496d3a23880c" class="bulleted-list"><li style="list-style-type:disc">On the other hand, a two-dimensional list, also known as a nested list, is a list of lists. Each element in the outer list is a list, and these inner lists can contain any number of elements. They are useful for representing tables, matrices, and other similar data. We will learn how to create and access elements within a two-dimensional list, and also learn how to use nested loops for traversing the elements of a two-dimensional list.</li></ul><p id="a6084925-0ca1-4e27-9b13-532ac8fe39ba" class="">By the end of this week, you will have a solid understanding of how to use lists in Python and be able to use them to solve real-world problems.</p><p id="8ff364d3-9c6d-4c25-820c-b7f036a6c602" class="">
+</p><p id="f41cd7a9-0687-4b65-80a8-2ae4fd36ac0c" class="">Source : Snakify.org</p><p id="01be319e-d650-419a-86a8-007a8cec6aab" class=""><a  target="_blank" href="https://snakify.org/en/lessons/lists/">Lesson 7 : Lists</a></p><p id="2fe867ca-f628-4c1d-89be-013f950fd1b9" class=""><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/">Lesson 9 : Two-dimensional lists (arrays)</a></p></div></figure><p id="1ce73ab9-12b4-41dd-8522-27e446d57c8d" class="">
+</p><h3 id="e2c9082a-efbd-41d1-8817-471a5ffc06a5" class="block-color-gray_background">Exercise 1: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/num_distinct/"><strong><strong>The number of distinct elements</strong></strong></a><strong><strong>»</strong></strong></h3><div id="e994a1cc-7dc9-45bc-8e58-a31a2ba59e99" class="column-list"><div id="a8fd23ad-fbb6-4151-abb6-491b3aacb673" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fef7c03b-7e0a-4f3e-98b0-ef64bf948b43"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">Given a list of values with all of its elements sorted in ascending order, determine and print the number of unique values in the list.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a8b36617-8167-4f6b-bef5-df801fb331e4"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="c7d67a19-cedf-4b55-b407-a34a19953882" class="code code-wrap"><code>a = [int(i) for i in input().split()]
+num_distinct = 1
+for i in range(0, len(a) - 1):
+    if a[i] != a[i + 1]:
+        num_distinct += 1
+print(num_distinct)</code></pre></div><div id="1f11819b-d17f-4496-a132-3113b7e58112" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="be4c231a-2a30-42ef-abb6-80661cd54df8"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="ff2872e5-11e2-4205-ace1-8fa80d5c2c43" class="code code-wrap"><code>def cntUnique(s):
+    values = [int(x) for x in s.split()]
+    count = 0
+    for i in range(len(values) - 1):
+        if values[i] != values[i + 1]:
+            count += 1
+    count += 1
+    return count
+    
+print(cntUnique(input()))</code></pre></div></div><h3 id="4756b0f6-3ca6-4848-a1be-3097ddd83756" class="block-color-gray_background">Exercise 2: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/swap_min_and_max/"><strong><strong>Swap min and max</strong></strong></a><strong><strong>»</strong></strong></h3><div id="fafa38ca-a244-4fcd-b772-24f1928fcb3c" class="column-list"><div id="3b5af663-a542-4906-a17c-013ee68ae284" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ffbc19a1-a650-4359-a44d-91d83e8deb7a"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">Given a list of unique numbers, swap the smallest and largest elements of this list. Print the resulting list.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5f4db411-a8ed-4c76-b420-4718178eea28"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="fb981f18-f424-45db-a195-e8532f58b683" class="code code-wrap"><code>a = [int(s) for s in input().split()]
+index_of_min = 0
+index_of_max = 0
+for i in range(1, len(a)):
+    if a[i] &gt; a[index_of_max]:
+        index_of_max = i
+    if a[i] &lt; a[index_of_min]:
+        index_of_min = i
+a[index_of_min], a[index_of_max] = a[index_of_max], a[index_of_min]
+print(&#x27; &#x27;.join([str(i) for i in a]))</code></pre></div><div id="74888a7a-523d-4f43-b553-41fa19eaef46" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ef041f9f-5d84-4489-bd37-f4d2a08c00c3"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="db3aad85-e2e8-45e0-ac2f-8a9263a06797" class="code code-wrap"><code>def swapMinMax(n):
+    min_i, max_i = 0, 0
+    
+    for i in range(len(n)):
+        if n[i] &lt; n[min_i]:
+            min_i = i
+        if n[i] &gt; n[max_i]:
+            max_i = i
+    n[min_i], n[max_i] = n[max_i], n[min_i]
+    return n
+
+arr = [int(x) for x in input().split()]
+arr = [str(x) for x in swapMinMax(arr)]
+result = &#x27; &#x27;.join(arr)
+print(result)</code></pre></div></div><h3 id="8843f8f7-6223-4fb1-b1e3-6b569a9954db" class="block-color-gray_background">Exercise 3: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/queens/"><strong><strong>Queens</strong></strong></a><strong><strong>»</strong></strong></h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e981827a-e8f5-4615-a1a3-3ee70ba34e72"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">Eight queens can be placed on an 8x8 chessboard so that they do not attack each other. Given the positions of eight queens on a chessboard, determine if any two queens can attack each other in the next move. Print &quot;YES&quot; if there is a possible attack, otherwise print &quot;NO&quot;. Input eight pairs of coordinates, one per line, representing the positions of the queens on the standard chessboard with rows and columns numbered starting from 1.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5476675c-57f6-4551-8774-2eaa5d9b0632"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="bffb5eb3-f152-4207-a574-7531c5248027" class="code"><code>n = 8
+x = []
+y = []
+for i in range(n):
+    new_x, new_y = [int(s) for s in input().split()]
+    x.append(new_x)
+    y.append(new_y)
+
+correct = True
+for i in range(n):
+    for j in range(i + 1, n):
+        if x[i] == x[j] or y[i] == y[j] or abs(x[i] - x[j]) == abs(y[i] - y[j]):
+            correct = False
+
+if correct:
+    print(&#x27;NO&#x27;)
+else:
+    print(&#x27;YES&#x27;)</code></pre><p id="b4fe579c-dfa8-47be-b9ab-d4533e69e391" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="94d857fc-721a-459b-9f96-c6320dfcd2d8"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="12b7d6f2-f912-4dda-b10b-6c2742568696" class="code"><code>def can_attack(x1, y1, x2, y2):
+    if x1 == x2 or y1 == y2:
+        return True
+    if abs(x1 - x2) == abs(y1 - y2):
+        return True
+    return False
+
+def check_queens():
+    queens = []
+    for i in range(8):
+        x, y = map(int, input().split())
+        queens.append((x, y))
+    for i in range(8):
+        for j in range(i+1, 8):
+            if can_attack(queens[i][0], queens[i][1], queens[j][0], queens[j][1]):
+                print(&quot;YES&quot;)
+                return
+    print(&quot;NO&quot;)
+
+check_queens()</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="06bbef6f-9a57-47b3-bb20-a57c0a0f0099"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/yang02.png"/></div><div style="width:100%">A more concise solution for the 8 queens problem</div></figure><pre id="6dcea421-8bae-47d7-b23c-83f7f1d7469f" class="code"><code>def can_attack(q1, q2):
+    (x1, y1), (x2, y2) = q1, q2
+    if x1 == x2 or y1 == y2 or abs(x1 - x2) == abs(y1 - y2):
+        return True
+    return False
+
+def check_queens():
+    queens = []
+    for i in range(8):
+        q = tuple(map(int, input().split()))
+        queens.append(q)
+
+    for i in range(8):
+        for j in range(i+1, 8):
+            if can_attack(queens[i], queens[j]):
+                print(&quot;YES&quot;)
+                return
+    print(&quot;NO&quot;)
+
+check_queens()</code></pre><h3 id="003c7b43-8ee7-4312-b31f-46beb983aa80" class="block-color-gray_background">Exercise 4: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/problems/snowflake/"><strong><strong>Snowflake</strong></strong></a><strong><strong>»</strong></strong></h3><div id="8ebd9221-9a07-4e4d-96b9-2160a486055f" class="column-list"><div id="0ec58b81-19c9-4474-b1cd-35f7c6eab174" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ddd84849-4851-4c4e-b113-5e2d58358372"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">To generate a two-dimensional array of size (n×n), where n is an odd integer, initialize each element to the string &quot;.&quot;, and then mark the middle row, middle column, and diagonals with the string &quot;*&quot;. This will create an image of a snowflake. Print the elements of the array in (n×n) rows and columns, separated by a single space.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6e614940-ed80-4788-8b3b-1b8dbea5a943"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="3982b6a9-d69e-44a6-af84-ab8dae530b49" class="code code-wrap"><code>n = int(input())
+a = [[&#x27;.&#x27;] * n for i in range(n)]
+for i in range(n):
+    a[i][i] = &#x27;*&#x27;
+    a[n // 2][i] = &#x27;*&#x27;
+    a[i][n // 2] = &#x27;*&#x27;
+    a[i][n - i - 1] = &#x27;*&#x27;
+for row in a:
+    print(&#x27; &#x27;.join(row))</code></pre></div><div id="a88b8867-464b-44d6-b30b-de59c2864f01" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fc7dcb51-2c88-47da-b917-770aa7477288"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="4d737420-664c-4450-8fe1-814dcbe98a08" class="code code-wrap"><code>def snowflake(n):
+    arr = [[&quot;.&quot; for _ in range(n)] for _ in range(n)]
+    mid = n // 2
+    for i in range(n):
+        arr[mid][i] = &quot;*&quot;
+        arr[i][mid] = &quot;*&quot;
+        arr[i][i] = &quot;*&quot;
+        arr[i][n-1-i] = &quot;*&quot;
+    return arr
+
+def print_arr(arr):
+    for row in arr:
+        print(&quot; &quot;.join(row))
+        
+
+print_arr(snowflake(int(input())))</code></pre></div></div><h3 id="30e91de4-8f9c-4da5-b3d1-0354349fab53" class="block-color-gray_background">Exercise 5: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/problems/matrix_multiply/"><strong><strong>Multiply two matrices</strong></strong></a><strong><strong>»</strong></strong></h3><div id="36b07943-d35c-466e-bdc8-d1580ad75258" class="column-list"><div id="d519f243-fa57-4374-94d1-761a9d333882" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b9cb3ccd-ecbb-43fa-abea-7c92e6774f97"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">Consider three positive integers m, n, and r. We are given an m x n matrix A with m rows and n columns, and an n x r matrix B with n rows and r columns. To form the product matrix AB, which is an m x r matrix, we compute the dot product of each row of A with each column of B. Specifically, for each (i,k) entry of AB, we compute the sum:<p id="216e001b-3c9e-4793-80ec-f9a3360f93f3" class="">            A[i][1]*B[1][k] + A[i][2]*B[2][k] + ... + A[i][n]*B[n][k]</p><p id="1445d4ec-3528-4325-83b2-548797247ab3" class="">Finally, we print the resulting matrix AB.</p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="900b5469-1891-4ecc-8816-13ff508416e6"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="f88edf40-bd0f-4b97-b58e-a51ca8846106" class="code code-wrap"><code>m, n, r = [int(k) for k in input().split()]
+A = [[int(k) for k in input().split()] for i in range(m)]
+B = [[int(k) for k in input().split()] for j in range(n)]
+C = [[0]*r for i in range(m)]
+
+for i in range(m):
+    for k in range(r):
+        for j in range(n):
+            C[i][k] += A[i][j] * B[j][k]
+
+print(&#x27;\n&#x27;.join([&#x27; &#x27;.join([str(k) for k in row]) for row in C]))</code></pre></div><div id="ba513d67-791c-4286-ac19-f194b2d514d2" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1f6720bd-99d4-42a2-b38f-c43fa993032a"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="41386233-9abf-4d2a-a447-dfa84c791be0" class="code code-wrap"><code>def read_input():
+    m, n, r = map(int, input().split())
+    A = [list(map(int, input().split())) for _ in range(m)]
+    B = [list(map(int, input().split())) for _ in range(n)]
+    return A, B
+
+def matrix_product(A, B):
+    m, n = len(A), len(B)
+    r = len(B[0])
+    AB = [[0] * r for _ in range(m)]
+    for i in range(m):
+        for j in range(r):
+            dot_product = 0
+            for k in range(n):
+                dot_product += A[i][k] * B[k][j]
+            AB[i][j] = dot_product
+    return AB
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(*row)
+
+A, B = read_input()
+AB = matrix_product(A, B)
+print_matrix(AB)</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="8e60b9d1-9902-44b4-bbc0-18be6a902b34"><div style="font-size:1.5em"><span class="icon">💻</span></div><div style="width:100%">In the <code><strong>print_matrix</strong></code> function, the statement <code><strong>print(*row)</strong></code> uses the asterisk (*) operator to unpack the elements of the <code><strong>row</strong></code> list and pass them as separate arguments to the <code><strong>print</strong></code> function.<p id="c4ff3da8-b7be-4b05-b4f0-7c58749957b6" class="">For example, if <code><strong>row</strong></code> is <code><strong>[1, 2, 3]</strong></code>, the statement <code><strong>print(*row)</strong></code> is equivalent to <code><strong>print(1, 2, 3)</strong></code>. This syntax allows us to print the elements of the row separated by spaces, without having to use a loop to iterate over the elements and print them one by one.</p><p id="927179d8-9ec2-415e-a27a-2c49d17a01c5" class="">In other words, <code><strong>print(*row)</strong></code> is a shorthand way of writing <code><strong>print(row[0], row[1], ..., row[n-1])</strong></code>, where <code><strong>n</strong></code> is the length of the <code><strong>row</strong></code> list.</p></div></figure></div></div><h3 id="f4ef6e0c-c685-4724-8aac-a1f98e500439" class="block-color-gray_background">Assignment 1: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="25551db1-8eba-40b7-85bf-59e7699009e7" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and complete the following problems.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="90a5b160-5863-43e1-9970-38d3b0e813ec"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%"><a  target="_blank" href="https://snakify.org/en/lessons/lists/">Lesson 7 : Lists</a><p id="d6fb0a9a-c1bb-49fa-9b9f-09fd44b45c47" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/even_indices/"><strong><strong>Even indices</strong></strong></a><strong><strong>»</strong></strong></p><p id="08c4a409-2829-47de-a6c4-e3f04d18c6ca" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/even_elements/"><strong><strong>Even elements</strong></strong></a><strong><strong>»</strong></strong></p><p id="dee0ea3c-5f7a-43a0-8b01-b0f784089eff" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/increasing_neighbours/"><strong><strong>Greater than previous</strong></strong></a><strong><strong>»</strong></strong></p><p id="48f4ac50-2b66-4bf1-9033-d4d50c324ea3" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/same_sign_neighbours/"><strong><strong>Neighbors of the same sign</strong></strong></a><strong><strong>»</strong></strong></p><p id="88db85bb-b1aa-493b-b478-f6c00027e26b" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/greater_than_neighbours/"><strong><strong>Greater than neighbours</strong></strong></a><strong><strong>»</strong></strong></p><p id="3f1bd632-493a-485a-82ef-0f79fbc2fc7a" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/maximal_element/"><strong><strong>The largest element</strong></strong></a><strong><strong>»</strong></strong></p><p id="4112c80b-6800-4aa7-8e9d-ed08032ffafb" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/swap_neighbours/"><strong><strong>Swap neighbours</strong></strong></a><strong><strong>»</strong></strong></p><p id="d062c4e4-65cd-49cb-95fd-6a67ff28a5f7" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/num_equal_pairs/"><strong><strong>The number of pairs of equal</strong></strong></a><strong><strong>»</strong></strong></p><p id="3ff00afe-a221-428b-9571-b1d94cf2befe" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/unique_elements/"><strong><strong>Unique elements</strong></strong></a><strong><strong>»</strong></strong></p><p id="1aa59511-e131-4667-a411-7f8479ac955d" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/lists/problems/kegelbahn/"><strong><strong>The bowling alley</strong></strong></a><strong><strong>»</strong></strong></p></div></figure><h3 id="c7b67103-cc51-40d5-8e3e-4d3f389efe46" class="block-color-gray_background">Assignment 2: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="3b5cb13b-b7e4-4630-a205-7efcc88d92bb" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and complete the following problems.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9a5c78ce-a61d-4e5b-b829-9f57d6e8339c"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%"><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/">Lesson 9 : Two-dimensional lists (arrays)</a><p id="62c7c516-8419-4609-9f56-e47a1a677725" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/problems/2d_max/"><strong><strong>Maximum</strong></strong></a><strong><strong>»</strong></strong></p><p id="00fd13da-94fd-43e0-a40a-6001012bf77d" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/problems/chessboard/"><strong><strong>Chess board</strong></strong></a><strong><strong>»</strong></strong></p><p id="2cc24ef4-b97a-4635-9266-267a36ed8544" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/problems/diagonals/"><strong><strong>The diagonal parallel to the main</strong></strong></a><strong><strong>»</strong></strong></p><p id="6b74fa0a-c0c6-4875-9c47-37f5ae32a324" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/problems/secondary_diagonal/"><strong><strong>Side diagonal</strong></strong></a><strong><strong>»</strong></strong></p><p id="685bd55d-2778-4785-a82a-266eac32ef8c" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/problems/swap_columns/"><strong><strong>Swap the columns</strong></strong></a><strong><strong>»</strong></strong></p><p id="fef74510-7fbf-43a5-84af-9887cf60c2af" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/two_dimensional_lists_arrays/problems/scale_matrix/"><strong><strong>Scale a matrix</strong></strong></a><strong><strong>»</strong></strong></p></div></figure><p id="f3d9ec4f-2004-44a6-b901-7fa15fb9417e" class="">
+</p><p id="d912efff-5a86-40a4-93b0-5a91948318a0" class="">
+</p><figure id="cec58f0f-b1e5-47a8-a5a8-c01b6a9b345d" class="image"><a href="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/7.png"><img style="width:1500px" src="Python%20Fundamentals%20(5%206)%2074d6444fb48a44679056a6de32feb24a/7.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

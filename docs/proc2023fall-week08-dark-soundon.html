@@ -1,0 +1,799 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Python Fundamentals (6/6)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="6dac0b0f-fccf-401c-a179-65f94c52e550" class="page sans"><header><img class="page-cover-image" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/notion-Python_(1).png" style="object-position:center 31.08%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/yang01.png"/></div><h1 class="page-title">Python Fundamentals (6/6)</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h2 id="defce6b4-10c1-4ff6-81ce-d925a1d7ffba" class="block-color-teal_background">References</h2><h3 id="e0c1d97d-d1c9-40b8-a320-ca030ec2c8a5" class="block-color-yellow">Online Python 3 Tutorials - Snakify</h3><figure id="83927dae-5d43-483f-b0ae-5e1fa1324939"><a  target="_blank" href="https://snakify.org/en/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Snakify - Python 3 Interactive Course</div><div class="bookmark-description">Teach Python 3 and web design with 200+ exercises - Learn Python 3 - Snakify Welcome to our interactive manual of Python 3 programming language. This is an introductory course that is way different from the others.</div></div><div class="bookmark-href"><img src="https://snakify.org/static/favicon.ico?3c9fe09" class="icon bookmark-icon"/>https://snakify.org/en/</div></div><img src="https://snakify.org/static/images/pony.png" class="bookmark-image"/></a></figure><h3 id="509d8ede-e96f-412d-9a39-745d7fa513d5" class="block-color-yellow">Official Python Online Documentation</h3><figure id="570e36bd-e8a2-4349-be8f-c05a38640252"><a  target="_blank" href="https://docs.python.org/3/index.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">3.11.1 Documentation</div><div class="bookmark-description">Welcome! This is the official documentation for Python 3.11.1.</div></div><div class="bookmark-href"><img src="https://docs.python.org/favicon.ico" class="icon bookmark-icon"/>https://docs.python.org/3/index.html</div></div></a></figure><h2 id="14e60bd2-aad6-42fc-876f-e403e7c9742d" class="block-color-teal_background">Class Activities</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a6fd0ee3-ec25-49f5-b107-036c681e90d3"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/yang04b.png"/></div><div style="width:100%">This week in our course, we will be focusing on two important collection data types in Python: sets and dictionaries.<ul id="7666b890-9e70-4cf0-910c-4ec0df65f190" class="bulleted-list"><li style="list-style-type:disc">We will begin by learning about sets, which are unordered collections of unique elements. Sets are commonly used to remove duplicates from a list or to check if an item is present in a collection. You will learn how to create sets, add and remove elements, and perform set operations like union, intersection, and difference. </li></ul><ul id="df63156e-4d8f-4209-84eb-481cf0b1e2a7" class="bulleted-list"><li style="list-style-type:disc">Next, we will move on to dictionaries, which are a collection of key-value pairs. Dictionaries are useful for storing and retrieving data efficiently, and are commonly used in tasks such as counting occurrences of words in a text. You will learn how to create dictionaries, add, update and remove elements, as well as how to use the keys, values and items functions. </li></ul><p id="849f0ca2-c4b1-4e21-82fd-37943895dc7f" class="">By the end of this week, you will have a good understanding of how to use sets and dictionaries in Python and be able to use them to solve real-world problems. You&#x27;ll also be able to use these data types in combination with other data types, such as lists and strings, to create more complex programs.</p><p id="3b0127ce-1fd9-4d65-bd3c-7d0227f76da5" class="">
+</p><p id="82c0586f-77ca-4962-9f37-3910ad106950" class="">Source : Snakify.org</p><p id="2c6951f5-af44-4d93-902a-bf5168a08f86" class=""><a  target="_blank" href="https://snakify.org/en/lessons/sets/">Lesson 10 : Sets</a></p><p id="5e7dae9c-b516-412e-8145-3adef83a33d0" class=""><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/">Lesson 11 : Dictionaries</a></p></div></figure><h3 id="1b44b56f-d71f-4722-bc63-54488f792874" class="block-color-gray_background">Exercise 1: <strong><strong>«</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/sets_intersection/"><strong><strong>The intersection of sets</strong></strong></a><strong><strong>»</strong></strong></h3><div id="3c07412c-b9ee-432e-9aca-4d574df7f88b" class="column-list"><div id="ce1e299c-69f8-4a28-886b-9087d0d9cbd8" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7813ca8f-6d86-40de-87fc-b545390da7b4"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">Write a Python script that takes in two lists of numbers and outputs a new list containing only the numbers that appear in both lists. The new list should be sorted in ascending order.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="26c84461-6e5f-45a1-8e74-86dce27e2237"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="4312294b-fcd9-4e0a-aff6-af45461a5f76" class="code code-wrap"><code>print(*sorted(set(input().split()) &amp; set(input().split()), key=int))</code></pre></div><div id="7058b58a-f315-4628-9f61-de8b1a681a44" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e13a6ed4-f2fe-434d-bc34-4e9739916ebe"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/yang02.png"/></div><div style="width:100%">An easier-to-read version.</div></figure><pre id="a66cd03b-06c7-449a-8d38-9d725c48a83c" class="code code-wrap"><code>n1 = set(map(int,input().split()))
+n2 = set(map(int,input().split()))
+
+n3 = sorted((n1 &amp; n2),key=int)
+
+print(*n3)</code></pre></div></div><h3 id="91e7118b-445e-46ff-94ac-897dd98b7a31" class="block-color-gray_background">Exercise 2: <strong><strong>«</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/occurs_before/"><strong><strong>Has the number been encountered before</strong></strong></a><strong><strong>»</strong></strong></h3><div id="1d0a0a4a-2e62-4985-9769-19f44c5a5762" class="column-list"><div id="5a7df0c6-39dd-4d54-adb6-9fdaaf2bd8a1" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a76bc6ba-9f4a-4ce1-9336-79b901b08c1f"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">Write a Python script that takes a list of numbers as input and checks if each subsequent number in the list has already appeared before. For each number, print &quot;YES&quot; if it has already been encountered, and &quot;NO&quot; if it has not been encountered. Print each answer on a separate line.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="52eb5095-592c-468b-bdca-1173c297ab85"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="4b65c256-34f4-4a46-a1dd-1a943727e222" class="code code-wrap"><code>numbers = [int(s) for s in input().split()]
+occur_before = set()
+for num in numbers:
+    if num in occur_before:
+        print(&#x27;YES&#x27;)
+    else:
+        print(&#x27;NO&#x27;)
+        occur_before.add(num)</code></pre></div><div id="1c61757a-b249-4bdc-a7c0-08d67e00e76f" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="785e1b14-349a-4746-a540-9f657c7f16d5"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="a07a3aab-03c4-4934-9604-83ec2b11bdf1" class="code code-wrap"><code>def check_encountered(numbers):
+    encountered = []
+    for num in numbers:
+        if num in encountered:
+            print(&quot;YES&quot;)
+        else:
+            print(&quot;NO&quot;)
+            encountered.append(num)
+
+nums = list(map(int, input().split()))
+check_encountered(nums)</code></pre><p id="14a07aa9-0219-40b5-aa8c-7a90400bb44f" class="">
+</p></div></div><h3 id="89f679ca-f5b3-4d47-bcf4-b60d17d3668b" class="block-color-gray_background">Exercise 3: <strong><strong>«</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/polyglots/"><strong><strong>Polyglots</strong></strong></a><strong><strong>»</strong></strong></h3><div id="39b55006-a77b-4df7-9382-f5c4b4f19444" class="column-list"><div id="2420193e-50a0-439b-b8f8-7dbba99c3962" style="width:62.5%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cf2ab153-071f-4900-8289-d3e492259901"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">At a certain school, each student can speak multiple languages. The goal is to figure out which languages are spoken by every student and which languages are spoken by at least one student. You have been given the number of students and a list of the languages each student speaks. Your task is to write a Python script that will output the following information:<ol type="1" id="33af410d-ab2b-450e-89b1-2eb16bef1975" class="numbered-list" start="1"><li>The number of languages spoken by all students, followed by the list of those languages.</li></ol><ol type="1" id="df9a01de-7200-4e04-8bed-3a48d85dfecb" class="numbered-list" start="2"><li>The number of languages spoken by at least one student, followed by the list of those languages.</li></ol><ol type="1" id="ded60239-63b3-4bfd-a986-46a1abbddcd5" class="numbered-list" start="3"><li>Note that the languages should be listed in alphabetical order.</li></ol></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c43844a1-c46b-477f-b1f5-da70d78c67b9"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="42757589-94f5-4367-a415-c7d01aded2a8" class="code"><code>students = [{input() for j in range(int(input()))} for i in range(int(input()))]
+known_by_everyone, known_by_someone = set.intersection(*students), set.union(*students)
+print(len(known_by_everyone), *sorted(known_by_everyone), sep=&#x27;\n&#x27;)
+print(len(known_by_someone), *sorted(known_by_someone), sep=&#x27;\n&#x27;)</code></pre></div><div id="9548875d-a83a-4dc8-b4dd-8f9fc0e81491" style="width:37.49999999999999%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="93b59c0e-47f0-4320-b04f-1d39994c20da"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="a9650512-589f-43dc-9f69-44d7f8ef3d6d" class="code code-wrap"><code>def find_langs(n):
+    al = set()
+    aln = set()
+
+    for i in range(n):
+        nl = int(input())
+        ll = []
+        for _ in range(nl):
+            ll.append(input())
+        aln.update(ll)
+        if i == 0:
+            al.update(ll)
+        else:
+            al.intersection_update(ll)
+
+    al = sorted(list(al))
+    aln = sorted(list(aln))
+
+    return len(al), al, len(aln), aln
+
+ns = int(input())
+na, a, nl, l = find_langs(ns)
+
+print(na)
+print(*a, sep=&#x27;\n&#x27;)
+print(nl)
+print(*l, sep=&#x27;\n&#x27;)</code></pre></div></div><h3 id="d8372e59-1ffa-47df-a8ff-308c9b2f6acf" class="block-color-gray_background">Exercise 4: <strong><strong>«</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/problems/most_frequent_word/"><strong><strong>The most frequent word</strong></strong></a><strong><strong>»</strong></strong></h3><div id="d8a904f2-5036-4623-a123-e9c2b32d9298" class="column-list"><div id="5848d8c2-6010-41d6-a51b-8aa4490dafa3" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2c514c9b-d21e-484a-91c1-dfc2dbe6b7ee"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">You are given a text consisting of multiple lines. The first line of the input indicates the total number of lines in the text. Each subsequent line contains a sequence of words separated by whitespace. Your task is to find the word that appears most frequently in the text. If multiple words appear with the same highest frequency, then select the one that is alphabetically the least. Your program should output the selected word as the answer.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="d1cc9241-7da4-4e3f-82ab-c1c088251186"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="fb2eed77-842a-4caf-9d10-5cf4741c4a75" class="code"><code>counter = {}
+for i in range(int(input())):
+    line = input().split()
+    for word in line:
+        counter[word] = counter.get(word, 0) + 1
+        
+max_count = max(counter.values())
+most_frequent = [k for k, v in counter.items() if v == max_count]
+print(min(most_frequent))</code></pre></div><div id="12c88410-4863-4328-8b33-8eb41f37d333" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="5effdf35-8677-4db6-b9ad-2e93c54198a6"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/yang02.png"/></div><div style="width:100%">To improve readability and avoid using list comprehension, consider utilizing the technique of creating functions in your code.</div></figure><pre id="5cee365d-b2fa-4fee-a36e-5886df929545" class="code code-wrap"><code>def count_words(line):
+    freq = {}
+    for _ in range(line):
+        for word in input().split():
+            try:
+                freq[word] += 1
+            except KeyError:
+                freq[word] = 1
+    return freq
+
+def max_freq(freq):
+    max_freq = max(freq.values())
+    max_word = &#x27;&#x27;
+    for word, f in freq.items():
+        if f == max_freq:
+            if word &lt; max_word or max_word == &#x27;&#x27;:
+                max_word = word
+    return max_word
+
+num_lines = int(input())
+words = count_words(num_lines)
+print(max_freq(words))</code></pre><p id="f5c2cea7-f4f7-49a9-938c-4881c4fdb70b" class="">
+</p></div></div><h3 id="a64b784a-aa71-4ae3-b011-39ee0e556e42" class="block-color-gray_background">Exercise 5: </h3><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c8baad57-fbfe-498d-bb11-ebf54e49dd6f"><div style="font-size:1.5em"><span class="icon">❓</span></div><div style="width:100%">Bob found an English-Latin dictionary and decided to create a Latin-English dictionary using it. The program requires the number of English words in the dictionary followed by each entry in the dictionary. Each entry contains the English word, a hyphen, and a comma-separated list of its Latin translations. The program should output the corresponding Latin-English dictionary in the same format, with the Latin translations listed in alphabetical order and the English words sorted within each line.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="274a98dc-1d1e-4e29-a6bd-b2e5bdc02212"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solution</div></figure><pre id="f2edcd1d-61da-459c-ab5f-ac3310f8a26b" class="code code-wrap"><code>from collections import defaultdict
+
+latin_to_english = defaultdict(list)
+for i in range(int(input())):
+    english_word, latin_translations_chunk = input().split(&#x27; - &#x27;)
+    latin_translations = latin_translations_chunk.split(&#x27;, &#x27;)
+    for latin_word in latin_translations:
+        latin_to_english[latin_word].append(english_word)
+    
+print(len(latin_to_english))
+for latin_word, english_translations in sorted(latin_to_english.items()):
+    print(latin_word + &#x27; - &#x27; + &#x27;, &#x27;.join(english_translations))</code></pre><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="12a4ded4-192e-4a67-97b8-26f35fbab270"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/yang02.png"/></div><div style="width:100%">An alternative approach to solve the problem is by making the code easier to read through the creation of functions.</div></figure><pre id="3acca0d3-c933-4f78-9fd1-358548c714db" class="code code-wrap"><code>def read_dictionary():
+    n = int(input())
+    dictionary = {}
+    for i in range(n):
+        entry = input().split(&quot; - &quot;)
+        english_word = entry[0]
+        latin_translations = entry[1].split(&quot;, &quot;)
+        for latin_word in latin_translations:
+            add_to_dictionary(dictionary, latin_word, english_word)
+    return dictionary
+
+def add_to_dictionary(dictionary, latin_word, english_word):
+    if latin_word in dictionary:
+        dictionary[latin_word].append(english_word)
+    else:
+        dictionary[latin_word] = [english_word]
+
+def print_dictionary(dictionary):
+    print(len(dictionary))
+    for latin_word in sorted(dictionary.keys()):
+        english_words = &quot;, &quot;.join(sorted(dictionary[latin_word]))
+        print(latin_word, &quot;-&quot;, english_words)
+
+dictionary = read_dictionary()
+print_dictionary(dictionary)</code></pre><h3 id="38d778f1-434f-4968-b1b7-512a96c8baf0" class="block-color-gray_background">Assignment 1: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="09f1d5c1-f80b-47f2-a8e8-5d098a27be78" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and complete the following problems.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="656207a8-f054-48b0-b818-f1b53faf23eb"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%"><a  target="_blank" href="https://snakify.org/en/lessons/sets/">Lesson 10 : Sets</a><p id="15fdc344-320a-4050-ab05-7cfea81664a5" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/number_of_unique/"><strong><strong>The number of distinct numbers</strong></strong></a><strong><strong>»</strong></strong></p><p id="296058c0-ab1c-4fee-9eab-e1bfbe34c71a" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/number_of_coincidental/"><strong><strong>The number of equal numbers</strong></strong></a><strong><strong>»</strong></strong></p><p id="3f505946-0947-449b-81ca-61d379c0f86b" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/cubes/"><strong><strong>Cubes</strong></strong></a><strong><strong>»</strong></strong></p><p id="dc52c85a-9f19-4758-9639-a258422aba64" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/number_of_words/"><strong><strong>The number of distinct words in some text</strong></strong></a><strong><strong>»</strong></strong></p><p id="0c207363-945a-44ac-8972-b56132e3eeec" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/guess_number/"><strong><strong>Guess the number</strong></strong></a><strong><strong>»</strong></strong></p><p id="a22dfd1d-f8f0-4eb4-9908-554b9ef929c2" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/sets/problems/polyglots/"><strong><strong>Polyglots</strong></strong></a><strong><strong>»</strong></strong></p></div></figure><p id="4d68f2bc-a84f-4277-98af-4ba1e3de6969" class="">
+</p><h3 id="ab5e1166-0ca2-4193-827c-cfb18a25706d" class="block-color-gray_background">Assignment 2: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="5142cf88-ba1a-4553-8e80-002f554eef28" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and complete the following problems.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="07994bd2-7701-49d0-9b75-ec283791d1ef"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%"><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/">Lesson 11 : Dictionaries</a><p id="1e6f119a-ee94-447c-9948-1a309ef8efd2" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/problems/number_of_occurrences_before/"><strong><strong>Number of occurrences</strong></strong></a><strong><strong>»</strong></strong></p><p id="64c8cd48-ffed-4a3a-9973-0e3a5ca2b408" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/problems/synonym_dictionary/"><strong><strong>Dictionary of synonyms</strong></strong></a><strong><strong>»</strong></strong></p><p id="c3e4e76a-efba-4e38-8057-75155ccb0853" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/problems/usa_elections/"><strong><strong>Elections in the USA</strong></strong></a><strong><strong>»</strong></strong></p><p id="d9cccf82-dc68-452a-a0f1-de0e5019a2b4" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/problems/permissions/"><strong><strong>Access rights</strong></strong></a><strong><strong>»</strong></strong></p><p id="68c26254-6a5d-42ee-afd0-c4c104f6be1a" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/problems/countries_and_cities/"><strong><strong>Countries and cities</strong></strong></a><strong><strong>»</strong></strong></p><p id="44602619-05a4-49a4-ba70-8ec120bd193e" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/dictionaries_dicts/problems/frequency_analysis/"><strong><strong>Frequency analysis</strong></strong></a><strong><strong>»</strong></strong></p></div></figure><p id="5c209ca5-3ba7-4539-83c2-a942cd260ebd" class="">
+</p><p id="09939692-cf5d-486c-b4c7-bbb7fa0605d1" class="">
+</p><figure id="8762ba73-3afe-4edc-99c1-73f57a2f2b70" class="image"><a href="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/11.png"><img style="width:1500px" src="Python%20Fundamentals%20(6%206)%206dac0b0ffccf401ca17965f94c52e550/11.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>

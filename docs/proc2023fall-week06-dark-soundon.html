@@ -1,0 +1,811 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Python Fundamentals (4/6)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="c689b6a5-ce5e-4a42-8747-66baed309b96" class="page sans"><header><img class="page-cover-image" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/notion-Python_(1).png" style="object-position:center 31.08%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/yang01.png"/></div><h1 class="page-title">Python Fundamentals (4/6)</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><p id="d55cb8c0-044c-4eef-bd02-9f4e20efdadf" class="">This week, we will cover two important topics in Python programming: strings and while loops. Strings are sequences of characters that can be manipulated using various methods and operators. While loops are a type of iteration that allows us to repeat a block of code as long as a condition is true. We will use Snakify Lesson 5 and 6 as our main resources for learning these topics. After we discuss the course material, you will be asked to do a formative assessment for each lesson. The assessment will consist of multiple-choice questions and short coding tasks that are similar to the ones on Snakify. Based on the assessment results, we will have an extra discussion about the questions that most students failed answering. </p><p id="786fab56-d365-485c-88a8-1a5a810f359d" class="">
+</p><p id="3368c456-3810-4c42-8155-5304fd5045c6" class="">We will learn two Python topics: strings and while loops. Strings are character sequences that we can manipulate with methods and operators. While loops repeat code until a condition is false. We will use Snakify Lesson 5 and 6 for these topics. After reviewing the material, you will do an assessment with multiple-choice questions and coding tasks like Snakify’s. We will discuss the questions that most students missed.</p><h2 id="225e027e-5038-4ca8-ac4d-0d958125268b" class="block-color-teal_background">References</h2><h3 id="871f5653-9732-483b-be2f-425630374dbc" class="block-color-yellow">Online Python 3 Tutorials - Snakify</h3><figure id="b1c052d2-9e7d-45d2-9061-70034b4e5520"><a  target="_blank" href="https://snakify.org/en/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Snakify - Python 3 Interactive Course</div><div class="bookmark-description">Teach Python 3 and web design with 200+ exercises - Learn Python 3 - Snakify Welcome to our interactive manual of Python 3 programming language. This is an introductory course that is way different from the others.</div></div><div class="bookmark-href"><img src="https://snakify.org/static/favicon.ico?3c9fe09" class="icon bookmark-icon"/>https://snakify.org/en/</div></div><img src="https://snakify.org/static/images/pony.png" class="bookmark-image"/></a></figure><h3 id="17ffcb92-d9c0-4f6b-9eab-7efab5f8f17a" class="block-color-yellow">Official Python Online Documentation</h3><figure id="f570d94a-ca52-41f8-92e5-0749438a7415"><a  target="_blank" href="https://docs.python.org/3/index.html" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">3.11.1 Documentation</div><div class="bookmark-description">Welcome! This is the official documentation for Python 3.11.1.</div></div><div class="bookmark-href"><img src="https://docs.python.org/favicon.ico" class="icon bookmark-icon"/>https://docs.python.org/3/index.html</div></div></a></figure><h2 id="d14244b4-da52-4d67-b136-3ca4251ab86d" class="block-color-teal_background">Class Activities</h2><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a11317a8-c4cc-4ef3-9998-1ca2c2394d1f"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/yang04b.png"/></div><div style="width:100%">This week, the course covers the following topics in Python programming:<ul id="1e4fd6fd-bd15-4970-9d2c-f9a80cb6b516" class="bulleted-list"><li style="list-style-type:disc">We will be diving into the basics of string data type, which are sequences of characters. We will cover various operations that can be performed on strings, such as concatenation, slicing, and manipulating the case of characters. </li></ul><ul id="e64db48c-cb1a-46db-a419-e092905cc18a" class="bulleted-list"><li style="list-style-type:disc">Additionally, we will also be learning how to handle text-based data, which may include tasks such as reading and writing to files, and searching for specific text within a string. </li></ul><ul id="544592e3-b519-4de2-a176-d55ed7f9bbbf" class="bulleted-list"><li style="list-style-type:disc">Alongside this, we will also be introducing the while-loop, which is a type of looping structure that allows you to repeatedly execute a block of code as long as a certain condition is met. This will be a great opportunity to solidify your understanding of loops and gain more practice with them.</li></ul><p id="d3d504aa-1f3f-4ba7-8ba3-c6523bc1404c" class="">
+</p><p id="28cdf755-6b58-4b77-9e61-c4cb7490c24d" class="">Source : Snakify.org</p><p id="d16c5132-340f-4199-aa6c-3d303e2e8d22" class=""><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/">Lesson 5 : Strings</a></p><p id="f778512b-9708-44ef-ac5a-0f17f8df7cec" class=""><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/">Lesson 6 : While loop</a></p></div></figure><p id="8b1a437d-3507-4997-8e6e-eb7efde1a32b" class=""><strong>Snakify Lesson 5 </strong>is about strings, which are sequences of characters that can be defined using single or double quotes. The lesson covers how to read strings from the standard input using the input() function, how to access individual characters or substrings using indexing and slicing, how to use string methods such as len(), lower(), upper(), count(), find(), replace() and strip(), how to iterate over strings using for loops, and how to format strings using placeholders and the format() method. The lesson also introduces some common string problems such as reversing a string, checking if a string is a palindrome, counting words or vowels in a string, and finding the longest word in a string. </p><h3 id="d84d69b6-784f-4dac-8204-7990b0674c2a" class="block-color-gray_background">Exercise 1: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/two_halves/"><strong><strong>The two halves</strong></strong></a><strong><strong>»</strong></strong></h3><div id="80603838-4b13-4ea1-a904-05a5efe0b449" class="column-list"><div id="ddc4a153-238c-43e4-b6be-48b80df7b6bf" style="width:50%" class="column"><ul id="f56078e8-38b2-4d7e-b422-58b7cb69e0ab" class="bulleted-list"><li style="list-style-type:disc">Cut the given string into two parts of equal length (if the length of the string is odd, the middle character should be in the first part, which will contain one more character than the second part). </li></ul><ul id="c3666404-43a7-403d-a835-9706135ed9cd" class="bulleted-list"><li style="list-style-type:disc">Print a new string with the second half followed by the first half.</li></ul><ul id="fe826319-392a-45a4-8cfe-a7f69ee345e3" class="bulleted-list"><li style="list-style-type:disc">Don&#x27;t use if statement to solve this task.<pre id="139dbc2d-9b27-4ee1-be6a-139ae535be81" class="code code-wrap"><code>from math import ceil
+
+s = input()
+c = ceil(len(s)/2)
+print(s[c:]+s[:c])</code></pre></li></ul></div><div id="deb08f1a-4928-4a24-ae64-74aecc921038" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3b2dac1f-06e9-4410-bfd9-f91631f7fe9a"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/yang04a.png"/></div><div style="width:100%">Consider the reason why this works.</div></figure><pre id="ee8dc8a8-0a20-452e-8f32-acc3003d9843" class="code code-wrap"><code>s = input()
+c = -(-len(s)//2)
+print(s[c:]+s[:c])</code></pre><p id="bcf47043-a05f-4cb6-8a2f-f874c2cdd067" class="">
+</p></div></div><h3 id="3d65bd8b-04dc-44ec-be46-22308db22af8" class="block-color-gray_background">Exercise 2: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/second_occurrence/"><strong><strong>The second occurrence</strong></strong></a><strong><strong>»</strong></strong></h3><div id="860791a5-a6af-431e-8492-819add30ab54" class="column-list"><div id="afe21bf0-b6c1-4027-ad09-273ff7ec6b90" style="width:50%" class="column"><ul id="66916cc2-c081-47d2-a3d5-0a7a6ebfbf31" class="bulleted-list"><li style="list-style-type:disc">If a string contains the letter &#x27;f&#x27;, print the index of its second occurrence. </li></ul><ul id="a41cfa53-8f9a-4b64-b099-41785f4055bd" class="bulleted-list"><li style="list-style-type:disc">If it only appears once, print -1, if it does not appear at all, print -2.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7764f1f4-2a80-4639-835d-ce6f260ba998"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solutiion</div></figure><pre id="baf26ca3-b17b-42f3-baf8-97a684b7afd3" class="code code-wrap"><code>s = input()
+if s.count(&#x27;f&#x27;) == 1:
+    print(-1)
+elif s.count(&#x27;f&#x27;) &lt; 1:
+    print(-2)
+else:
+    print(s.find(&#x27;f&#x27;, s.find(&#x27;f&#x27;) + 1))</code></pre></div><div id="23892ba5-0167-4b7a-af1e-65f662e76ab1" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c8cf7477-bea3-4579-82a3-b0e734140937"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/yang02.png"/></div><div style="width:100%">Create a function to accomplish this task.</div></figure><pre id="6cdbb018-7556-4003-8f4c-1191361beb96" class="code code-wrap"><code>def second_f(s):
+    count = s.count(&quot;f&quot;)
+    if count &lt; 2:
+        return -1 if count == 1 else -2
+    first_f = s.index(&quot;f&quot;)
+    s = s[first_f+1:]
+    return s.index(&quot;f&quot;) + first_f + 1
+
+print(second_f(input()))</code></pre></div></div><h3 id="bd4fa5d0-1f1c-4c41-b303-a6a808f4f194" class="block-color-gray_background">Exercise 3: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/reverse_fragment/"><strong><strong>Reverse the fragment</strong></strong></a><strong><strong>»</strong></strong></h3><div id="66465f90-4436-45fd-a9c2-a1db46cb591a" class="column-list"><div id="49ff2efd-8a6b-4325-b378-8613b1a7b306" style="width:50%" class="column"><ul id="ec796540-e571-450c-a122-426cb062c174" class="bulleted-list"><li style="list-style-type:disc">If a string contains the letter &#x27;h&#x27; at least twice, reverse the order of characters between the first and last occurrences of &#x27;h&#x27;.<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3210b106-2723-44a1-b36d-316985ead893"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solutiion</div></figure><pre id="be6d957d-cf70-4221-8bc6-1d7a582979b5" class="code code-wrap"><code>s = input()
+a = s[:s.find(&#x27;h&#x27;)] 
+b = s[s.find(&#x27;h&#x27;):s.rfind(&#x27;h&#x27;) + 1]
+c = s[s.rfind(&#x27;h&#x27;) + 1:]
+s = a + b[::-1] + c
+print(s)</code></pre></li></ul></div><div id="80f03926-1ca0-4e6c-bd5f-34bf43781ba9" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="62b620f2-8404-4e76-baf9-a234d5820415"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/yang02.png"/></div><div style="width:100%">Create a function to accomplish this task.</div></figure><pre id="1dc62253-ecca-4200-9e7d-58b18bdbc93c" class="code code-wrap"><code>def reverse_h(s):
+    first_h = s.index(&quot;h&quot;)
+    last_h = s.rindex(&quot;h&quot;)
+    if first_h != last_h:
+        s = s[:first_h + 1] + s[first_h + 1:last_h][::-1] + s[last_h:]
+    return s
+
+print(reverse_h(input()))</code></pre></div></div><h3 id="137c5be0-8f62-4ffc-ab80-e27d3101ede8" class="block-color-gray_background">Exercise 4: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/delete_every_third_char/"><strong><strong>Delete every third character</strong></strong></a><strong><strong>»</strong></strong></h3><div id="8043d258-0605-436d-b22f-c4be8efabad4" class="column-list"><div id="d62e08ad-dc39-4b88-8046-cc9bc9122718" style="width:50%" class="column"><ul id="c42128f6-de27-4df4-a618-b45cf6c93919" class="bulleted-list"><li style="list-style-type:disc">Remove all characters from the given string whose position in the string is divisible by 3.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="be81e347-cf48-46cf-a12b-8efee59c55f2"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solutiion</div></figure><pre id="8f7ddf87-1c09-4aba-ab68-4cd4990fef96" class="code code-wrap"><code>s = input()
+t = &#x27;&#x27;
+for i in range(len(s)):
+    if i % 3 != 0:
+        t = t + s[i]
+print(t)</code></pre></div><div id="d8618d40-3ae6-468d-9ac7-2dafa1c13036" style="width:50%" class="column"><pre id="2bb29f61-3056-497f-82bc-9702be9148b9" class="code code-wrap"><code>s = input()
+
+for i in range(len(s)):
+    if i%3==0: continue
+    print(s[i],end=&#x27;&#x27;)</code></pre><p id="8495c75f-8318-4402-9d86-9181f0a73d85" class="">
+</p></div></div><h3 id="b666187d-86d6-4e3b-a354-9b9aa71f3336" class="block-color-gray_background">Exercise 5: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_index_of_max/"><strong><strong>The index of the maximum of a sequence</strong></strong></a><strong><strong>»</strong></strong></h3><div id="9b7b5ef7-14f5-4a62-8ff6-ef1d2e6265a0" class="column-list"><div id="318a9e5b-e17b-48ce-822f-44dcbb1738be" style="width:50%" class="column"><ul id="7dbb2708-106b-4320-9852-4b43d998cc16" class="bulleted-list"><li style="list-style-type:disc">Given a sequence of integers that ends with the number 0, determine the index of the largest number in the sequence. </li></ul><ul id="1f4bea33-0705-46ac-a962-2dbcfe1c28cb" class="bulleted-list"><li style="list-style-type:disc">If multiple numbers are tied for the largest value, print the index of the first occurrence of that value.</li></ul><ul id="059756f5-c58b-407c-81f3-164b9a3eca5d" class="bulleted-list"><li style="list-style-type:disc">The returned index value should begin at 1.<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="00855833-b526-45d0-95e0-48a6c49c3832"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solutiion</div></figure><pre id="29432f9b-a2d4-483b-ba66-f61f0f2d0eaf" class="code code-wrap"><code>max = 0
+index_of_max = -1
+element = -1
+len = 1
+while element != 0:
+    element = int(input())
+    if element &gt; max:
+        max = element
+        index_of_max = len
+    len += 1
+print(index_of_max)</code></pre></li></ul></div><div id="bd598730-9232-41a7-bda2-aee83411f93c" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6b2ebf7b-fde0-42c7-bdcb-917769504323"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/yang02.png"/></div><div style="width:100%">Create a function to accomplish this task.</div></figure><pre id="6efbccd2-7ae9-493a-ace0-1f6439d2b737" class="code code-wrap"><code>def max_idx(lst):
+    m = max(lst)
+    if lst.count(m) == 1:
+        return lst.index(m)+1
+    for i in range(len(lst)):
+        if lst[i] == m:
+            return i+1
+
+l =[]
+while True:
+    c = int(input())
+    if c==0: break
+    l.append(c)
+
+print(max_idx(l))</code></pre><p id="69df8229-bd3e-4e4b-91f3-f788f68bb6db" class="">
+</p></div></div><h3 id="ed3fb71e-aabf-4d54-af01-24daa6f2cd58" class="block-color-gray_background">Exercise 6: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_second_max/"><strong><strong>The second maximum</strong></strong></a><strong><strong>»</strong></strong></h3><div id="8fb87a65-bf0e-4aa6-8d92-67ae3028c507" class="column-list"><div id="fb17d4d5-7a0c-4060-b9d8-29be704c6bc4" style="width:50%" class="column"><ul id="6f2d37fb-b91f-4798-861b-52098b9923eb" class="bulleted-list"><li style="list-style-type:disc">Given a sequence of distinct, positive integers that ends with the number 0, determine the value of the second largest number in the sequence. </li></ul><ul id="9fe9f95e-5e42-49c7-9e66-3c4e8204dde2" class="bulleted-list"><li style="list-style-type:disc">It is guaranteed that the sequence contains at least two elements.<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="789a95e5-4d98-4bae-a774-1e3e6128f899"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solutiion</div></figure><pre id="df8d9d54-748a-4da9-8727-8f3a89159e97" class="code code-wrap"><code>first_max = int(input())
+second_max = int(input())
+if first_max &lt; second_max:
+    first_max, second_max = second_max, first_max
+element = int(input())
+while element != 0:
+    if element &gt; first_max:
+        second_max, first_max = first_max, element
+    elif element &gt; second_max:
+        second_max = element
+    element = int(input())
+print(second_max)</code></pre></li></ul></div><div id="e7029ef5-f792-4c4e-b3f3-6c3a5e8fbde3" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c11c22b0-60a0-4386-877d-cabe3e8a72a7"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="1650c8a5-a3fb-4528-9fa2-f253e1e42038" class="code code-wrap"><code>def sec_largest(arr):
+    m1 = max(arr)
+    arr.remove(m1)
+    m2 = max(arr)
+    return m2
+    
+def read_seq():
+    seq = []
+    num = int(input())
+    while num != 0:
+        seq.append(num)
+        num = int(input())
+    return seq
+
+print(sec_largest(read_seq()))</code></pre><p id="12638cc7-1c9e-4edf-b362-bb39d47b4748" class="">
+</p></div></div><h3 id="0e159278-0225-4cb4-8731-face1ab2f6eb" class="block-color-gray_background">Exercise 7: <strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_max_chunk_of_repetitions/"><strong><strong>The maximum number of consecutive equal elements</strong></strong></a><strong><strong>»</strong></strong></h3><div id="bd7417c8-281a-4f79-ba0a-c14194aaa104" class="column-list"><div id="bf527736-574f-40e7-85df-813f90f81db6" style="width:50%" class="column"><ul id="7917abb7-169b-44f1-982b-7766e0a626a0" class="bulleted-list"><li style="list-style-type:disc">Given a sequence of integer numbers that ends with the number 0, determine the longest consecutive stretch of numbers where all elements are the same.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="653e7078-d728-4601-9521-f4a4c495955e"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%">Snakify’s Model Solutiion</div></figure><pre id="e86258fc-01a7-408f-9bbd-6c08dc2c7e48" class="code code-wrap"><code>prev = -1
+curr_rep_len = 0
+max_rep_len = 0
+element = int(input())
+while element != 0:
+    if prev == element:
+        curr_rep_len += 1
+    else:
+        prev = element
+        max_rep_len = max(max_rep_len, curr_rep_len)
+        curr_rep_len = 1
+    element = int(input())
+max_rep_len = max(max_rep_len, curr_rep_len)
+print(max_rep_len)</code></pre></div><div id="7c0e58fd-a50f-4134-a74b-00abf04481c5" style="width:50%" class="column"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e9871e14-280d-40f8-a84a-2cc4df4a2dbb"><div style="font-size:1.5em"><img class="icon" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/yang02.png"/></div><div style="width:100%">Create functions to accomplish this task.</div></figure><pre id="9887a7ab-699b-4b3e-9a38-fc5e8dead6ac" class="code code-wrap"><code>def max_clen(sequence):
+    max_length = 0
+    curr_length = 0
+    curr_num = None
+    for num in sequence:
+        if num == curr_num:
+            curr_length += 1
+        else:
+            curr_num = num
+            curr_length = 1
+        max_length = max(max_length, curr_length)
+    return max_length
+    
+def read_seq():
+    seq = []
+    num = int(input())
+    while num != 0:
+        seq.append(num)
+        num = int(input())
+    return seq
+
+print(max_clen(read_seq()))</code></pre></div></div><h3 id="94c14086-0cda-4c08-8c1c-31814b9fd5a4" class="block-color-gray_background">Assignment 1: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="53d58d1e-ef80-4574-b7ec-3d69702c4595" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and complete the following problems.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="585f54c4-8ec9-4a22-bf41-d41f5af31e99"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%"><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/">Lesson 5 : Strings</a><p id="9eac295a-b763-4cb6-91d9-11debff411fa" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/slices/"><strong><strong>Slices</strong></strong></a><strong><strong>»</strong></strong></p><p id="0f42aca7-d773-472b-89cc-21bd7710ad22" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/num_words/"><strong><strong>The number of words</strong></strong></a><strong><strong>»</strong></strong></p><p id="3cd2990a-3930-452e-aa6f-96de32976861" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/swap_two_words/"><strong><strong>To swap the two words</strong></strong></a><strong><strong>»</strong></strong></p><p id="7e3ce399-1019-496f-a6d4-5d35a00eef7d" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/first_and_last_occurrences/"><strong><strong>The first and last occurrence</strong></strong></a><strong><strong>»</strong></strong></p><p id="efd8b30c-5299-4c15-828a-657f14aa9c36" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/remove_fragment/"><strong><strong>Remove the fragment</strong></strong></a><strong><strong>»</strong></strong></p><p id="9db42628-eed4-4659-b9da-444a9e24db8e" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/replace_substring/"><strong><strong>Replace the substring</strong></strong></a><strong><strong>»</strong></strong></p><p id="4f06aaad-b77e-4170-b5bf-570046648d35" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/delete_character/"><strong><strong>Delete a character</strong></strong></a><strong><strong>»</strong></strong></p><p id="7d102ec5-2c0a-4948-ad84-1dce3573a8d5" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/strings_str/problems/replace_inside_fragment/"><strong><strong>Replace within the fragment</strong></strong></a><strong><strong>»</strong></strong></p></div></figure><p id="840466de-31fa-467b-b77a-933ee3f2b28a" class="">
+</p><h3 id="088540a8-03e3-4edc-b753-ceb1a76b1ca2" class="block-color-gray_background">Assignment 2: Online practice on the website <a href="http://snakify.org/">Snakify.org</a>: </h3><ul id="62d72cc8-36c8-47a2-8900-df8278933ebc" class="bulleted-list"><li style="list-style-type:disc">Please log in to your Snakify account and complete the following problems.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9cb9ebc2-0a70-4f59-9b96-55c28f911e48"><div style="font-size:1.5em"><span class="icon">🖥️</span></div><div style="width:100%"><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/">Lesson 6 : While loop</a><p id="637a1b92-b2fa-4c16-b19d-4bb77e6cf023" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/list_of_squares/"><strong><strong>List of squares</strong></strong></a><strong><strong>»</strong></strong></p><p id="830a4fa9-2e17-401b-b046-7f5c8000c28b" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/least_divisor/"><strong><strong>Least divisor</strong></strong></a><strong><strong>»</strong></strong></p><p id="58a1ce82-981b-4c5b-8a46-b947a65e8283" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/powers_of_two/"><strong><strong>The power of two</strong></strong></a><strong><strong>»</strong></strong></p><p id="e487cf31-739b-4d79-9bd6-346704e74e79" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/morning_jog/"><strong><strong>Morning jog</strong></strong></a><strong><strong>»</strong></strong></p><p id="965d9c84-cd74-4867-8476-935fcc3dd4da" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_len/"><strong><strong>The length of the sequence</strong></strong></a><strong><strong>»</strong></strong></p><p id="b82796a5-c3f3-46e1-9c62-d8296ac2324b" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/eq_sum/"><strong><strong>The sum of the sequence</strong></strong></a><strong><strong>»</strong></strong></p><p id="d44309d4-4619-4aac-8f38-8009095a5ad5" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_avg/"><strong><strong>The average of the sequence</strong></strong></a><strong><strong>»</strong></strong></p><p id="9c46bcd2-14cc-4a7c-b936-e4e57436dac9" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_max/"><strong><strong>The maximum of the sequence</strong></strong></a><strong><strong>»</strong></strong></p><p id="16bd4687-0235-4161-a6fd-791ca3998010" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_num_even/"><strong><strong>The number of even elements of the sequence</strong></strong></a><strong><strong>»</strong></strong></p><p id="94064db2-f698-4e5b-a540-4903af3ff61c" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_increasing_neighbours/"><strong><strong>The number of elements that are greater than the previous one</strong></strong></a><strong><strong>»</strong></strong></p><p id="21476ef9-564f-4318-b9f9-6ee50fa0c333" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/seq_num_maximal/"><strong><strong>The number of elements equal to the maximum</strong></strong></a><strong><strong>»</strong></strong></p><p id="66cc0a32-e08c-47da-a7fd-0b7c7ba90688" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/kth_fibonacci/"><strong><strong>Fibonacci numbers</strong></strong></a><strong><strong>»</strong></strong></p><p id="99d0c79e-9327-4cb5-9a54-76ff2bf1b09b" class=""><strong><strong>Problem «</strong></strong><a  target="_blank" href="https://snakify.org/en/lessons/while_loop/problems/is_fibonacci/"><strong><strong>The index of a Fibonacci number</strong></strong></a><strong><strong>»</strong></strong></p></div></figure><p id="a9811825-3acd-438a-8ec1-1e004e026b8a" class="">
+</p><p id="4bfab33c-8b12-40ac-ae53-828fe5b06be0" class="">
+</p><figure id="18420864-4935-4e45-a144-50848677a6a4" class="image"><a href="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/16.png"><img style="width:1500px" src="Python%20Fundamentals%20(4%206)%20c689b6a5ce5e4a42874766baed309b96/16.png"/></a></figure></div></article>
+<script>hljs.highlightAll();</script>
+</body></html>
