@@ -1,0 +1,746 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Enough JavaScript for Node-RED</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></head><body><article id="37e05b45-ae74-4663-960c-62d04d6eaadf" class="page sans"><header><img class="page-cover-image" src="Enough%20JavaScript%20for%20Node-RED%2037e05b45ae744663960c62d04d6eaadf/microprocessor.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Enough%20JavaScript%20for%20Node-RED%2037e05b45ae744663960c62d04d6eaadf/yang-tr-wb.png"/></div><h1 class="page-title">Enough JavaScript for Node-RED</h1><p class="page-description"></p><link rel="stylesheet" href="dark-theme.css"><link rel="stylesheet"  target="_blank" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github-dark-dimmed.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script></header><div class="page-body"><h3 id="e9a15d88-15ba-4de8-988d-2339d03ea49c" class="block-color-gray_background">Variables, data types</h3><p id="bab78396-f5a3-413f-99f5-295d67e666a9" class="">JavaScript is a loosely typed programming language, meaning variables can hold values of any data type without requiring explicit declarations upfront. Some primary data types include:</p><p id="94f1e28d-afe0-418d-a687-f2ada4c9164c" class="">Numbers - Integers like 10 or floating point values like 3.14159. Useful for math calculations.
+Strings - Represent textual data defined within single or double quote marks. Let you work with words and characters.
+Booleans - True/false logical values, great for conditional tests.
+Undefined - Variables declared but not assigned hold the undefined value. Useful for validating if variables have been initialized.
+Null - Represents the absence of a value. Helpfully allows explicitly clearing object properties or pointers.</p><p id="76191a12-71e9-4d34-a5c4-572aae368459" class="">You define variables using the var, let or const keywords:</p><pre id="1919aa19-5459-4ee7-b134-c16752c6046c" class="code code-wrap"><code>let counter = 10;
+const apiKey = &#x27;123MY_KEY&#x27;;</code></pre><p id="a0ed1056-869c-409e-8e41-78e241286d12" class="">Use const for values that won&#x27;t change and let for variables you reassign.</p><p id="689319d4-182c-4df2-a331-793eb2d56f76" class="">A variable declared anywhere in a JavaScript function is available throughout the function. Functions provide scope - variables inside aren’t available globally.</p><p id="26ca71d3-2435-4abf-b7bd-c45290ac5a47" class="">As a dynamic language, the same JavaScript variable can be reassigned to hold different data types over time:</p><pre id="87682c1e-a00a-4671-b2e3-28fe2a3fb59c" class="code code-wrap"><code>let myVar = &quot;Hello&quot;;
+myVar = 10;
+myVar = true;</code></pre><p id="c5b9f844-b65a-40ae-859a-b97791b3e873" class="">This flexibility is convenient but can also lead to unintended coercion, so take care to know the type being stored at any given time.</p><h3 id="ce4ca6d7-8031-40a2-9aeb-8f872dc09d83" class="block-color-gray_background">Functions, arguments</h3><p id="6e4f773a-3c7d-4a83-a2c0-04ad694ed24c" class="">Functions provide reusable blocks of code that can be called from different parts of a program to perform a specific task.</p><p id="9e017bcc-3012-4378-8b2b-75c3e85afd4d" class="">Functions take input via arguments, process the data, and usually return an output value or object.</p><p id="914dc00b-72bd-485d-aa8e-4d681de1bf37" class="">For example:</p><pre id="d1449815-98a1-42ef-b042-223e5b46e205" class="code code-wrap"><code>function doubleNumber(num) {
+  return num * 2;
+}
+
+doubleNumber(5); // Returns 10</code></pre><p id="86ef01ef-196d-47d9-b6ce-2171987cdb3f" class="">Defining functions in JavaScript involves:</p><ul id="8b8e848a-04e9-4a3d-900f-b8a1630864aa" class="bulleted-list"><li style="list-style-type:disc">The function keyword</li></ul><ul id="1c049e69-afd9-401a-a915-9c73b9f237dc" class="bulleted-list"><li style="list-style-type:disc">A meaningful imperative name</li></ul><ul id="9305bcb7-60dc-4d71-a630-109d97683161" class="bulleted-list"><li style="list-style-type:disc">Parameters provided inside parentheses</li></ul><ul id="f479e43c-3ad5-4313-b1a5-1a8e0dfac931" class="bulleted-list"><li style="list-style-type:disc">The function body contained in { } braces</li></ul><ul id="acfa9ebb-0d35-4a06-8845-212acd0996d5" class="bulleted-list"><li style="list-style-type:disc">Using return to return values</li></ul><p id="f8e281bd-2284-4255-aea5-f058cc5c1907" class="">Function names should use camelCase and clearly indicate what they do.</p><p id="57516d79-10d9-4b3b-882a-cd2c111ae16a" class="">You can call defined functions elsewhere in your code by name and passed argument values will be assigned to the listed parameters.</p><p id="cc474c73-afd2-47a6-a03d-2f58a77daebb" class="">Arguments get passed by value in JavaScript, meaning a function receives copies of the values rather than direct references. This allows modifying arguments inside functions without impacting the original variables.</p><p id="d811027a-f0b6-44c7-a34b-e6cfbe78c68e" class="">However, objects get passed by reference, allowing directly mutating object properties inside functions. Understanding this distinction takes practice.</p><p id="14eb3019-387a-4dbe-99dc-cef0d8a1537b" class="">Well structured functions accept necessary inputs, execute a single focused task, and avoid shared dependencies to maximize reusability.</p><h3 id="0ea4b39c-99f6-4184-95da-67c05bf6cf77" class="block-color-gray_background">Conditional logic</h3><p id="37516410-0a05-4edf-a923-8e3d76ca1a7e" class="">Conditionals provide a way to selectively run certain blocks of code based on the evaluation of expressions that resolve to true or false.</p><p id="8e3bbc0b-bfa8-49fc-a6c5-3c43ff01cb71" class="">The primary conditional in JavaScript is the if statement:</p><pre id="42daa5e6-3be0-4dc5-944d-7aab6494f205" class="code code-wrap"><code>let temp = 22;
+
+if (temp &gt; 30) {
+   console.log(&quot;Hot outside!&quot;);
+} else if (temp &lt; 16) {
+   console.log(&quot;Chilly day!&quot;);
+} else {
+   console.log(&quot;Moderate temperature.&quot;);
+}</code></pre><p id="522445a9-a224-468e-ae54-3851c94b878a" class="">Breaking this down:</p><ul id="b86654c9-1700-44e4-9d0b-a26b91604cf8" class="bulleted-list"><li style="list-style-type:disc">The if statement evaluates the expression inside parentheses and executes the following code block if true</li></ul><ul id="10860af2-647a-4d46-b88a-6cbe012d73ec" class="bulleted-list"><li style="list-style-type:disc">else if clauses let you chain additional tests</li></ul><ul id="9fba357f-cbf0-4271-9394-ddc0f330ac06" class="bulleted-list"><li style="list-style-type:disc">else provides a default case if none match</li></ul><p id="3a874b0c-8cff-41a7-b5ba-ed93aa419a3b" class="">Some key notes on conditional syntax:</p><ul id="c7578be2-8790-4377-af99-8a9120c14d64" class="bulleted-list"><li style="list-style-type:disc">Code blocks are wrapped in { } braces</li></ul><ul id="801d56d8-e474-475a-924f-825b1606803e" class="bulleted-list"><li style="list-style-type:disc">Comparators include &gt;, &lt;, &lt;=, &gt;= to compare values</li></ul><ul id="f1463dad-056a-451a-b89a-27c6958974d0" class="bulleted-list"><li style="list-style-type:disc">== loose equality checks and === strict equality compare without type coercion</li></ul><ul id="1ae6a074-d0f0-4b4c-80bb-19df3ecdf7ec" class="bulleted-list"><li style="list-style-type:disc">Multiple conditions can be chained using &amp;&amp; || logical operators</li></ul><p id="4adffe32-1ec3-4aca-abb6-0056ccbabdf7" class="">The ternary operator provides a shortcut syntax for if/else expressions:</p><pre id="c3df505a-fa6a-4fb8-bbe6-6f6040d9664e" class="code code-wrap"><code>let canVote = (age &gt;= 18) ? true : false;</code></pre><p id="33481045-7232-49eb-94d5-36f92978f53b" class="">With the condition before ?, the true expression after ?, and false expression after the : colon.</p><p id="27f85297-d84f-4a4d-9e41-f2cb0d7ca509" class="">Conditionals are fundamental building blocks in JavaScript. Expressions usually check a variable’s value to decide which path to execute. Complex conditionals might be abstracted into reusable functions or excellent use cases for switch statements.</p><h3 id="536f4a1b-f16a-4fea-b56a-a124030c2849" class="block-color-gray_background">Loops</h3><p id="8fd1f4df-9374-41e9-a0ee-9657aaca112e" class="">Loops allow repeating execution of a section of code multiple times without needing to rewrite repetitive logic. JavaScript includes several loop construct options:</p><p id="903f4246-d9ab-46f4-9b25-9c4a2039dfe2" class="">for Loop</p><pre id="ccb9fdbc-3d85-4f30-bb4e-5b745bb7a86a" class="code code-wrap"><code>for (let i = 0; i &lt; 5; i++) {
+  console.log(&quot;Iterating!&quot;, i);
+}</code></pre><ul id="9fb97683-bbe1-4324-8001-3176eade937b" class="bulleted-list"><li style="list-style-type:disc">Commonly used classic loop structure</li></ul><ul id="fba7ce56-c9e1-4dca-ae50-f1d8d621e4dd" class="bulleted-list"><li style="list-style-type:disc">Great for iterating a known number of times</li></ul><ul id="8fc36764-74fa-4df2-ae08-496282487fe2" class="bulleted-list"><li style="list-style-type:disc">Use a counter variable (i) that gets updated each pass</li></ul><ul id="747648cc-5f6c-453e-bce8-138b807c6f82" class="bulleted-list"><li style="list-style-type:disc">Initialize, evaluate condition, increment in one line</li></ul><p id="b6f7e4b4-e332-4464-a601-355688fc9d78" class="">while Loop</p><pre id="5cec5b07-0536-4fcf-931c-83115cf9773b" class="code code-wrap"><code>let input = getInput();
+
+while (!input) {
+  input = getInput(); // Fetch user input
+}
+</code></pre><ul id="26390ec4-3469-42dd-9eb1-328077f52a2c" class="bulleted-list"><li style="list-style-type:disc">Code executes over and over as long as condition is true</li></ul><ul id="55e91009-6368-4c0b-ac96-9eefecc72b8b" class="bulleted-list"><li style="list-style-type:disc">Useful when exit condition is event triggered</li></ul><p id="7fa5f893-4d14-4387-b60d-dc736f649819" class="">do while Loop</p><pre id="fd1d705b-3645-4adf-8497-29e4c38b1046" class="code code-wrap"><code>let input = getInput();
+
+do {
+  // Process input
+} while (!input);
+</code></pre><ul id="b5f0a4b4-954e-467e-87ce-52a23163353e" class="bulleted-list"><li style="list-style-type:disc">Similar to while but runs at least once before checking test</li></ul><ul id="b9467f62-10e6-4b71-8c89-588eaefc9313" class="bulleted-list"><li style="list-style-type:disc">Avoid needing separate first check</li></ul><p id="84f66644-9878-4dd9-a13b-361a22b01969" class="">Can also iterate arrays or objects:</p><pre id="1b7bb394-887a-4126-88f5-93a8469616f2" class="code code-wrap"><code>let people = [{name: &quot;John&quot;}, {name: &quot;Mike&quot;}];
+
+people.forEach(person =&gt; {
+  console.log(person.name);
+});
+</code></pre><ul id="c78d8cf9-0eb8-4215-8df8-96cb92030e54" class="bulleted-list"><li style="list-style-type:disc">Concise way to execute logic for each item</li></ul><ul id="62ee979b-3c33-4c46-95be-e24ad8b5d876" class="bulleted-list"><li style="list-style-type:disc">Arrow func arguments provide access</li></ul><p id="a18c0f68-ed3f-4e11-a19e-ec024009ebe3" class="">Break and continue keywords allow finer grain control over loop execution.</p><p id="4a3da026-6f06-42f5-99dd-d897923f14c8" class="">Getting practice iterating data structures and objects with different looping approaches accelerates mastery.</p><h3 id="38835ac5-d7a4-434c-8675-ab25e512f8e5" class="block-color-gray_background">Working with objects</h3><p id="9f27e223-aba1-4d73-bba2-b7758fcf595e" class="">Objects represent real-world entities comprised of a collection of related properties and methods. For example a car object:</p><pre id="7932cddf-9247-4715-83c9-5c811cfa1666" class="code code-wrap"><code>let car = {
+  make: &quot;Toyota&quot;,
+  model: &quot;Camry&quot;,
+  year: 2022,
+  wheels: 4,
+  drive: function() {
+    console.log(&quot;Vroom!&quot;);
+  }
+};
+</code></pre><p id="f239b126-8718-4c8b-91de-222f657385ff" class="">Objects provide a natural way to model composite real-world things.</p><p id="49a7c802-0b20-4bb7-babf-207610873874" class="">Defining objects uses { } brace notation with comma-separated key:value pairs inside:</p><ul id="d50c9d1a-d4f5-4fa8-93f1-fa38d1285845" class="bulleted-list"><li style="list-style-type:disc">Keys act as property identifiers</li></ul><ul id="d582c441-ae9d-4a4d-8c81-a418162fd22c" class="bulleted-list"><li style="list-style-type:disc">Values can contain data types or functions</li></ul><ul id="1dacfacb-afa6-430e-879b-e75b29353330" class="bulleted-list"><li style="list-style-type:disc">Javascript object properties can also point to other nested objects</li></ul><p id="5f96912d-d36c-4d3e-beab-e9bef11d59f1" class="">Access values on an object instance using dot or square bracket notation:</p><pre id="3bf411cb-cb35-4b8e-8d2c-0134af097433" class="code code-wrap"><code>car.make; // &quot;Toyota&quot;
+car[&#x27;model&#x27;]; // &quot;Camry&quot;
+</code></pre><p id="0d88460d-4e7c-48a6-808b-810f9b448817" class="">Dot notation simpler for known valid identifiers. Bracket access allows dynamic property names.</p><p id="32106148-ab00-4b45-97e1-db2c4541fbfa" class="">Functions attached directly on objects are called methods - these define object capabilities:</p><pre id="ce72a06a-5bea-44a6-99af-974ea01868a4" class="code code-wrap"><code>person.walk();
+circle.getArea();
+</code></pre><p id="84b64f34-b4a4-402b-9106-370b90bcb7f8" class="">The this keyword available in methods refers to the parent object instance.</p><p id="b6f18d39-8094-45c7-9a87-d0165dbb6169" class="">JavaScript classes provide an alternate concise syntax for defining object structure reusable across instances.</p><h3 id="666dd729-b403-4be7-b4ea-3a7f790d4782" class="block-color-gray_background">Handling errors</h3><p id="6cfaa6de-13ac-4a88-9d4d-52ce941a5931" class="">Errors refer to runtime problems that cause code to fail. In JavaScript, errors immediately halt execution when thrown.</p><p id="1afd1a5d-2415-435d-86be-ddaae93e6056" class="">Robust applications anticipate and handle errors gracefully to avoid application crashes. For example:</p><pre id="e7206971-bda9-498b-b0bc-13a7444bf4f3" class="code code-wrap"><code>try {
+  nonExistentFunction();
+} catch (error) {
+  console.log(&quot;Application recovered from error: &quot; + error);
+}</code></pre><ul id="f6670aee-7a83-492f-84c0-4c8d654259d2" class="bulleted-list"><li style="list-style-type:disc">The try block wraps around logic that may throw exceptions</li></ul><ul id="9c25a046-1588-42c8-a0a4-233a37c75f97" class="bulleted-list"><li style="list-style-type:disc">catch block executes only in case of errors</li></ul><ul id="23f85daf-2782-417e-a181-8dcde1006ade" class="bulleted-list"><li style="list-style-type:disc">Error variable contains info about what went wrong</li></ul><p id="713c5b89-1c73-4187-b66d-b755c2940880" class="">Can handle multiple specific error cases:</p><pre id="5fac8ccd-3b11-420e-8c4d-c99416a41c3c" class="code code-wrap"><code>try {
+
+} catch (TypeError) {
+
+} catch (ServerError) {
+
+}</code></pre><p id="ad611612-bf9e-4101-b0ef-7a44e274a5e2" class="">Specific error info helps correct issues.</p><p id="8e542c6b-5e61-4845-900d-11573bfe7404" class="">You can also create custom application error classes extending the built-in Error class:</p><pre id="e13885e2-b0bc-419f-b094-407a8859b7b8" class="code code-wrap"><code>class InvalidInputError extends Error {
+  constructor(message) {
+    super(message);
+  }
+}
+
+throw new InvalidInputError(&quot;Invalid input&quot;);</code></pre><p id="858c41b2-ebd5-4ad3-8b66-c8dbe7de6083" class="">This allows throwing application-specific errors to better isolate issues without exposing internals through generic JavaScript errors.</p><p id="c6bf80d3-2fe7-40dc-9e2b-7e82095a3b68" class="">Other language features like strict mode, linting and debugging stacks also help harden code against potential issues.</p><p id="96f074f2-a4f7-4006-abf5-dde8d37f9c96" class="">Writing resilient code requires an eye towards anticipating failures - with good practice this becomes second nature.</p><p id="0447d169-e307-44ac-a5c5-1e57ae74b9bd" class="">
+</p><p id="df2b136b-c37f-47b1-b9f6-9e8ee7639e60" class="">
+</p><figure id="1fd7d1ba-49c8-4201-afdf-ecb01b1d7467" class="image"><a href="Enough%20JavaScript%20for%20Node-RED%2037e05b45ae744663960c62d04d6eaadf/16.png"><img style="width:1500px" src="Enough%20JavaScript%20for%20Node-RED%2037e05b45ae744663960c62d04d6eaadf/16.png"/></a></figure><p id="725028cf-4fee-4614-9538-c5526d651c52" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+<script>hljs.highlightAll();</script>
+</body></html>
